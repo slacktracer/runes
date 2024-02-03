@@ -23,8 +23,8 @@
 
 	.tiles {
 		--gap: 0.25rem;
-		--height: 5;
-		--width: 4;
+		--height: 6;
+		--width: 5;
 
 		display: grid;
 		gap: var(--gap);

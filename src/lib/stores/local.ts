@@ -4,6 +4,6 @@ import { makeTile } from '$lib/core/make-tile.js';
 import { makeAdjacentTilesMap } from '../core/make-adjacent-tiles-map.js';
 
 export const local: Writable<LocalState> = writable({
-	adjacentTilesMap: makeAdjacentTilesMap({ height: 5, width: 4 }),
-	tiles: Array.from({ length: 20 }).map(makeTile)
+	adjacentTilesMap: makeAdjacentTilesMap({ height: 6, width: 5 }),
+	tiles: Array.from({ length: 30 }).map(makeTile)
 });
