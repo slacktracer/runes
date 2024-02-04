@@ -2,12 +2,18 @@
 	import { local } from '$lib/stores/local.js';
 	import Tile from '$lib/components/Tile.svelte';
 	import { executeRandomRound } from '$lib/core/execute-random-round.js';
+	import { block } from '$lib/core/block.js';
 
 	executeRandomRound();
 </script>
 
 <div class="wrapper">
-	<div class="tiles">
+	<div
+		class="tiles"
+		on:mousemove={block}
+		on:touchmove={block}
+		role="presentation"
+	>
 		{#each $local.tiles as tile}
 			<Tile {tile}></Tile>
 		{/each}
@@ -15,6 +21,10 @@
 </div>
 
 <style>
+	:global(html, body) {
+		overscroll-behavior: contain;
+	}
+
 	.wrapper {
 		display: flex;
 		justify-content: center;

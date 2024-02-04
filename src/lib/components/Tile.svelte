@@ -8,9 +8,12 @@
 	class="tile"
 	class:belongsToRune={tile.belongsToRune}
 	class:belongsToMissedRune={tile.belongsToRune && tile.belongsToMissedRune}
+	class:belongsToBlockedRune={tile.belongsToBlockedRune}
 	data-index={tile.index}
 >
-	<!--	<span style="color: lightgray">{tile.index}</span>-->
+	{#if !tile.belongsToBlockedRune && !tile.belongsToMissedRune && tile.blocked}
+		<span class="blocked">&#x2298;</span>
+	{/if}
 </div>
 
 <style>
@@ -33,15 +36,21 @@
 	}
 
 	.belongsToRune {
-		animation: appear 100ms ease-in;
-		background: #48cae4;
+		animation: appear 50ms ease-in;
+		background: #0077b6;
 	}
 
-	/*.belongsToBlockedRune {*/
-	/*	background: green;*/
-	/*}*/
+	.belongsToBlockedRune {
+		background: seagreen;
+	}
 
 	.belongsToMissedRune {
 		background: red;
+	}
+
+	.blocked {
+		color: #00a6ff;
+		font-size: 2.25rem;
+		line-height: 29px;
 	}
 </style>

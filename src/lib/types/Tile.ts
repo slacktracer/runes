@@ -1,5 +1,7 @@
 export type Tile = {
-	belongsToRune: boolean;
+	belongsToBlockedRune: boolean;
 	belongsToMissedRune: boolean;
+	belongsToRune: boolean;
+	blocked: boolean;
 	index: number;
 };

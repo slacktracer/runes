@@ -3,6 +3,12 @@ import type { Tile } from '$lib/types/Tile.js';
 import { local } from '$lib/stores/local.js';
 
 export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
+	local.update((state) => {
+		state.currentMove = move;
+
+		return state;
+	});
+
 	return new Promise<void>((resolve) => {
 		setTimeout(() => {
 			move.rune.forEach((piece) => {
@@ -28,8 +34,10 @@ export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
 			() => {
 				move.rune.forEach((piece) => {
 					local.update((state) => {
-						state.tiles[piece].belongsToRune = false;
+						state.tiles[piece].belongsToBlockedRune = false;
 						state.tiles[piece].belongsToMissedRune = false;
+						state.tiles[piece].belongsToRune = false;
+						state.tiles[piece].blocked = false;
 
 						return state;
 					});
@@ -37,7 +45,7 @@ export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
 
 				resolve();
 			},
-			move.delay + move.timeToLive + 250
+			move.delay + move.timeToLive + 200
 		);
 	});
 };
