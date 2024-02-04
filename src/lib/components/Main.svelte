@@ -4,7 +4,9 @@
 	import { executeRandomRound } from '$lib/core/execute-random-round.js';
 	import { block } from '$lib/core/block.js';
 
-	executeRandomRound();
+	const start = () => {
+		executeRandomRound();
+	};
 
 	const reload = () => window.location.reload();
 </script>
@@ -12,6 +14,7 @@
 <div class="wrapper">
 	<div
 		class="tiles"
+		on:click|once={start}
 		on:mousemove={block}
 		on:touchmove={block}
 		role="presentation"
