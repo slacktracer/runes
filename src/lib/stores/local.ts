@@ -6,6 +6,7 @@ import { makeAdjacentTilesMap } from '../core/make-adjacent-tiles-map.js';
 export const local: Writable<LocalState> = writable({
 	adjacentTilesMap: makeAdjacentTilesMap({ height: 6, width: 5 }),
 	currentMove: undefined,
+	enemyPoints: 150,
 	finished: false,
 	life: 50,
 	tiles: Array.from({ length: 30 }).map(makeTile)

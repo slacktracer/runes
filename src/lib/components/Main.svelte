@@ -32,7 +32,7 @@
 	<div>
 		ENEMY
 		<br />
-		<span>150</span>
+		<span>{$local.enemyPoints}</span>
 	</div>
 </div>
 

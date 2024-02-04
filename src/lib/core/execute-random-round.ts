@@ -1,18 +1,22 @@
 import { local } from '$lib/stores/local.js';
 import { executeMove } from '$lib/core/execute-move.js';
 import { get } from 'svelte/store';
-import { makeRandomRound } from '$lib/core/make-random-round.js';
+import { makeRandomMove } from '$lib/core/make-random-move.js';
 
 export const executeRandomRound = async () => {
 	const localStore = get(local);
 
-	const randomRound = makeRandomRound();
+	let i = 0;
 
-	for (const move of randomRound) {
+	while (i < 250) {
+		const move = makeRandomMove();
+
 		await executeMove({ move, tiles: localStore.tiles });
 
 		if (localStore.finished) {
 			break;
 		}
+
+		i += 1;
 	}
 };
