@@ -37,7 +37,7 @@ export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
 
 				resolve();
 			},
-			move.delay + move.timeToLive + 500
+			move.delay + move.timeToLive + 250
 		);
 	});
 };

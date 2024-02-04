@@ -33,7 +33,7 @@
 	}
 
 	.belongsToRune {
-		animation: appear 50ms ease-in;
+		animation: appear 100ms ease-in;
 		background: #48cae4;
 	}
 

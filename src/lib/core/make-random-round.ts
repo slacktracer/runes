@@ -5,7 +5,7 @@ import { makeMove } from '$lib/core/make-move.js';
 import { getRandomIntegerInclusive } from '$lib/core/get-random-integer-inclusive.js';
 
 export const makeRandomRound = () => {
-	const moves = Array.from({ length: 10 }).map(() => {
+	const moves = Array.from({ length: 50 }).map(() => {
 		const localStore = get(local);
 
 		const rune = makeRune({
@@ -14,7 +14,7 @@ export const makeRandomRound = () => {
 		});
 
 		return makeMove({
-			delay: getRandomIntegerInclusive({ max: 25, min: 15 }) * 100,
+			delay: 500,
 			rune
 		});
 	});
