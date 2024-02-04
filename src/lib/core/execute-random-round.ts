@@ -10,5 +10,9 @@ export const executeRandomRound = async () => {
 
 	for (const move of randomRound) {
 		await executeMove({ move, tiles: localStore.tiles });
+
+		if (localStore.finished) {
+			break;
+		}
 	}
 };

@@ -5,6 +5,8 @@
 	import { block } from '$lib/core/block.js';
 
 	executeRandomRound();
+
+	const reload = () => window.location.reload();
 </script>
 
 <div class="wrapper">
@@ -18,6 +20,24 @@
 			<Tile {tile}></Tile>
 		{/each}
 	</div>
+</div>
+
+<div class="info">
+	<div>
+		LIFE
+		<br />
+		<span>{$local.life}</span>
+	</div>
+
+	<div>
+		ENEMY
+		<br />
+		<span>150</span>
+	</div>
+</div>
+
+<div class="action">
+	<button on:click={reload}>Restart</button>
 </div>
 
 <style>
@@ -42,5 +62,28 @@
 		grid-template-rows: repeat(var(--height), 1fr);
 		padding: var(--gap);
 		width: 300px;
+	}
+
+	.info {
+		color: #666;
+		display: grid;
+		font-family: sans-serif;
+		font-size: 1.2rem;
+		grid-template-columns: 1fr 1fr;
+		margin-block: 4rem 2rem;
+		margin-inline: auto;
+		padding: 1rem;
+
+		& > div {
+			text-align: center;
+
+			& > span {
+				font-weight: bold;
+			}
+		}
+	}
+
+	.action {
+		text-align: center;
 	}
 </style>

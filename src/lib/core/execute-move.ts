@@ -1,6 +1,7 @@
 import type { Move } from '$lib/types/Move.js';
 import type { Tile } from '$lib/types/Tile.js';
 import { local } from '$lib/stores/local.js';
+import { applyDamage } from '$lib/core/apply-damage.js';
 
 export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
 	local.update((state) => {
@@ -32,6 +33,8 @@ export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
 					return state;
 				});
 			});
+
+			applyDamage({ move });
 		}, move.delay + move.timeToLive);
 
 		setTimeout(
