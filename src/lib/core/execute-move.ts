@@ -21,6 +21,10 @@ export const executeMove = ({ move }: { move: Move; tiles: Tile[] }) => {
 		}, move.delay);
 
 		setTimeout(() => {
+			if (move.blocked) {
+				return;
+			}
+
 			move.rune.forEach((piece) => {
 				local.update((state) => {
 					state.tiles[piece].belongsToMissedRune = true;
