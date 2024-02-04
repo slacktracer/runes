@@ -48,7 +48,7 @@
 	.wrapper {
 		display: flex;
 		justify-content: center;
-		padding-top: 2rem;
+		padding-top: 1rem;
 	}
 
 	.tiles {
@@ -56,6 +56,7 @@
 		--height: 8;
 		--width: 5;
 
+		border: 2px solid ghostwhite;
 		display: grid;
 		gap: var(--gap);
 		grid-template-columns: repeat(var(--width), 1fr);
@@ -70,7 +71,7 @@
 		font-family: sans-serif;
 		font-size: 1.2rem;
 		grid-template-columns: 1fr 1fr;
-		margin-block: 4rem 2rem;
+		margin-block: 1rem 1rem;
 		margin-inline: auto;
 		padding: 1rem;
 
