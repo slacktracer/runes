@@ -53,7 +53,7 @@
 
 	.tiles {
 		--gap: 0.25rem;
-		--height: 6;
+		--height: 7;
 		--width: 5;
 
 		display: grid;
