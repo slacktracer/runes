@@ -28,6 +28,14 @@ export const applyDamage = ({ move }: { move: Move }) => {
 			state.finished = true;
 
 			state.life = 0;
+
+			if (typeof window !== 'undefined') {
+				window.navigator.vibrate(500);
+			}
+		} else {
+			if (typeof window !== 'undefined') {
+				window.navigator.vibrate(50);
+			}
 		}
 
 		return state;
