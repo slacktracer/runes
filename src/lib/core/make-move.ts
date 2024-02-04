@@ -8,7 +8,7 @@ export const makeMove = ({
 	delay: number;
 	rune: Rune;
 }): Move => {
-	const timeToLive = 300 + rune.length * 250;
+	const timeToLive = 300 + rune.length * 70 * (1 + (rune.length / 10 - 0.2));
 
 	return {
 		blocked: false,
