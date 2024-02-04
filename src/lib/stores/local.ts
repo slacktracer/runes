@@ -9,8 +9,8 @@ const width = 5;
 export const local: Writable<LocalState> = writable({
 	adjacentTilesMap: makeAdjacentTilesMap({ height, width }),
 	currentMove: undefined,
-	enemyPoints: 150,
+	enemyPoints: 60,
 	finished: false,
-	life: 50,
+	life: 20,
 	tiles: Array.from({ length: height * width }).map(makeTile)
 });
