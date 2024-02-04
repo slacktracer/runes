@@ -24,14 +24,11 @@ export const block = (event: TouchEvent) => {
 		local.update((state) => {
 			state.tiles[Number(element.dataset.index)].blocked = true;
 
-			const moveWasBlocked = state.currentMove?.rune.every((piece) => {
-				console.log(piece, state.tiles[piece].blocked);
-				return state.tiles[piece].blocked;
-			});
+			const moveWasBlocked = state.currentMove?.rune.every(
+				(piece) => state.tiles[piece].blocked
+			);
 
-			console.log(moveWasBlocked);
-
-			if (moveWasBlocked) {
+			if (moveWasBlocked && !state.currentMove?.blocked) {
 				state.currentMove?.rune.forEach((piece) => {
 					state.tiles[piece].belongsToBlockedRune = true;
 					state.tiles[piece].belongsToRune = false;
