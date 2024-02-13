@@ -3,7 +3,7 @@ import * as url from 'url';
 import {
 	createWSSGlobalInstance,
 	onHttpServerUpgrade
-} from './lib/server/webSocketUtils';
+} from './webSocketUtils.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
