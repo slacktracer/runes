@@ -13,3 +13,5 @@ export const GET = (async ({ url, locals }) => {
 	}
 	return json({ success: true, message: 'Hello world from GET handler', url });
 }) satisfies RequestHandler;
+
+// globalThis[GlobalThisWSS].

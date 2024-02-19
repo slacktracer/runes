@@ -3,8 +3,8 @@ import type { LocalState } from '$lib/types/LocalState.js';
 import { makeTile } from '$lib/core/make-tile.js';
 import { makeAdjacentTilesMap } from '../core/make-adjacent-tiles-map.js';
 
-const height = 8;
-const width = 5;
+const height = 16;
+const width = 10;
 
 export const local: Writable<LocalState> = writable({
 	adjacentTilesMap: makeAdjacentTilesMap({ height, width }),

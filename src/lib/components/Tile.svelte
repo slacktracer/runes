@@ -26,7 +26,6 @@
 	.tile {
 		align-items: center;
 		aspect-ratio: 1 / 1;
-		/*border: 1px solid ghostwhite;*/
 		display: flex;
 		justify-content: center;
 		opacity: 1;

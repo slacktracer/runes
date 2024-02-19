@@ -51,6 +51,14 @@ export const createWSSGlobalInstance = () => {
 		ws.on('close', () => {
 			console.log(`[wss:global] client disconnected (${ws.socketId})`);
 		});
+
+		ws.on('message', (e) => {
+			const rune = JSON.parse(e);
+			wss.clients.forEach((client) => {
+				client.send(JSON.stringify({ rune }));
+			});
+			console.log('got mess', JSON.stringify({ rune }));
+		});
 	});
 
 	return wss;
