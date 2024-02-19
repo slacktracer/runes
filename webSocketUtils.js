@@ -1,8 +1,8 @@
 import { parse } from 'url';
 import { WebSocketServer } from 'ws';
 import { nanoid } from 'nanoid';
-import type { ExtendedWebSocketServer } from '$lib/server/webSocketUtils.js';
-import type { ExtendedGlobal } from '$lib/server/webSocketUtils.js';
+// import type { ExtendedWebSocketServer } from '$lib/server/webSocketUtils.js';
+// import type { ExtendedGlobal } from '$lib/server/webSocketUtils.js';
 // import type { Server, WebSocket as WebSocketBase } from 'ws';
 // import type { IncomingMessage } from 'http';
 // import type { Duplex } from 'stream';
@@ -42,9 +42,9 @@ export const onHttpServerUpgrade = (
 export const createWSSGlobalInstance = () => {
 	const wss = new WebSocketServer({
 		noServer: true
-	}) as ExtendedWebSocketServer;
+	});
 
-	(globalThis as ExtendedGlobal)[GlobalThisWSS] = wss;
+	globalThis[GlobalThisWSS] = wss;
 
 	wss.on('connection', (ws) => {
 		ws.socketId = nanoid();
@@ -65,4 +65,3 @@ export const createWSSGlobalInstance = () => {
 
 	return wss;
 };
-
