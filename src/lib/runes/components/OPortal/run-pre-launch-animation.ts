@@ -1,5 +1,4 @@
 import { local } from "../../local.js";
-import { makeStylus } from "../../make-stylus.js";
 
 export const runPreLaunchAnimation = () => {
   const { promise, resolve } = Promise.withResolvers<void>();
