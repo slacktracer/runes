@@ -4,30 +4,15 @@ import { local } from "../../local.js";
 import { launch } from "./launch.js";
 
 export const stop = () => {
+  console.log("stop");
   const localStore = get(local);
 
-  const { runeFinished } = localStore;
+  const { rune } = localStore;
 
-  if (runeFinished) {
-    const { rune } = localStore;
-
-    launch({ rune });
-
-    local.update((state) => {
-      state.runeFinished = false;
-
-      state.rune = [];
-
-      return state;
-    });
-
-    return;
-  }
+  launch({ rune });
 
   local.update((state) => {
-    state.isBeingCarved = false;
-
-    state.runeFinished = true;
+    state.rune = [];
 
     return state;
   });
