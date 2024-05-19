@@ -3,6 +3,13 @@ import { get } from "svelte/store";
 import { local } from "../../local.js";
 import { launch } from "./launch.js";
 
+const randomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 export const stop = () => {
   const localStore = get(local);
 
@@ -12,18 +19,52 @@ export const stop = () => {
 
   const intervalID = setInterval(() => {
     local.update((state) => {
-      state.rune.forEach((point) => {
-        point.x += 5;
-        point.y += 5;
-      });
+      const length = state.rune.length;
 
-      if (state.rune[0].x > 300) {
-        clearInterval(intervalID);
+      if (length < 3) {
+        const [first, last] = state.rune;
 
-        launch({ rune: originalRune });
+        const legA = first.x - last.x;
+        const legB = first.y - last.y;
 
-        state.rune = [];
+        const distance = Math.sqrt(legA ** 2 + legB ** 2);
+
+        if (distance === 0) {
+          rune.state = "last";
+
+          clearInterval(intervalID);
+
+          launch({ rune: originalRune });
+
+          return state;
+        }
+
+        const angle = Math.atan2(last.y - first.y, last.x - first.x);
+
+        const velocity = Math.min(distance, 5);
+        const sine = Math.sin(angle) * velocity;
+        const cosine = Math.cos(angle) * velocity;
+
+        first.y += sine;
+        first.x += cosine;
+
+        const updatedLegA = first.x - last.x;
+        const updatedLegB = first.y - last.y;
+
+        const updatedDistance = Math.sqrt(updatedLegA ** 2 + updatedLegB ** 2);
+
+        if (updatedDistance > 0) {
+          last.y -= sine;
+          last.x -= cosine;
+        }
+
+        // state.rune = [];
+        return state;
       }
+
+      const pointToRemove = randomInt(1, length - 1);
+
+      state.rune.splice(pointToRemove, 1);
 
       return state;
     });

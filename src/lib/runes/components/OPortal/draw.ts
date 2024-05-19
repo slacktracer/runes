@@ -16,7 +16,7 @@ export const draw = ({
 
   context.strokeStyle = runeColour;
 
-  context.lineWidth = 25;
+  context.lineWidth = rune.state === "last" ? 250 : 25;
 
   context.lineCap = "round";
 
