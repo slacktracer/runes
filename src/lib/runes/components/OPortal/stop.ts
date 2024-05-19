@@ -1,6 +1,7 @@
 import simplify from "simplify-js";
 import { get } from "svelte/store";
 
+import { getInitialRuneState } from "../../get-initial-rune-state.js";
 import { local } from "../../local.js";
 import { launch } from "./launch.js";
 import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
@@ -17,6 +18,14 @@ export const stop = async () => {
   });
 
   await runPreLaunchAnimation();
+
+  local.update((state) => {
+    state.rune.rendering.isRendering = false;
+
+    state.rune = getInitialRuneState();
+
+    return state;
+  });
 
   const localStore = get(local);
 
