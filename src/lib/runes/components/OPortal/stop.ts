@@ -4,22 +4,28 @@ import { local } from "../../local.js";
 import { launch } from "./launch.js";
 
 export const stop = () => {
-  console.log("stop");
   const localStore = get(local);
 
   const { rune } = localStore;
 
-  launch({ rune });
+  const originalRune = structuredClone(rune);
 
-  local.update((state) => {
-    state.rune = [];
+  const intervalID = setInterval(() => {
+    local.update((state) => {
+      state.rune.forEach((point) => {
+        point.x += 5;
+        point.y += 5;
+      });
 
-    return state;
-  });
+      if (state.rune[0].x > 300) {
+        clearInterval(intervalID);
 
-  const { stylus } = localStore;
+        launch({ rune: originalRune });
 
-  const { x, y } = stylus.getBrushCoordinates();
+        state.rune = [];
+      }
 
-  stylus.update({ x, y }, { both: true });
+      return state;
+    });
+  }, 1000 / 30);
 };
