@@ -19,9 +19,14 @@ export const local = writable<LocalState>({
   counterRuneColour: "hsla(178, 100%, 50%, 0.5)",
   counterStylus: makeStylus({ initialPoint: { x: 0, y: 0 }, radius: 0 }),
   rune: {
-    colour: "hsla(46, 100%, 50%, 1)",
-    stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),
+    rendering: {
+      colour: "hsla(46, 100%, 50%, 0.75)",
+      radius: 25,
+      vertices: [],
+      state: "",
+    },
     vertices: [],
+    stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),
   },
   incomingRune: [],
   incomingRuneColour: "hsla(355, 100%, 50%, 1)",

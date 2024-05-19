@@ -29,7 +29,7 @@
     canvasWidth = container.clientWidth * ratio;
 
     if (context) {
-      context.strokeStyle = $local.rune.colour;
+      context.strokeStyle = $local.rune.rendering.colour;
 
       context.lineWidth = lineWidth;
 

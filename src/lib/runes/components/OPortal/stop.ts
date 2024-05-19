@@ -7,11 +7,11 @@ import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
 
 export const stop = async () => {
   local.update((state) => {
-    const simplifiedVertices = simplify(state.rune.vertices);
+    const vertices = simplify(state.rune.vertices);
 
-    state.rune.vertices = simplifiedVertices;
+    state.rune.vertices = vertices;
 
-    state.rune.simplifiedVertices = simplifiedVertices;
+    state.rune.rendering.vertices = vertices;
 
     return state;
   });

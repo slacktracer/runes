@@ -12,29 +12,37 @@ export const draw = ({
     return;
   }
 
-  context.strokeStyle = rune.colour;
-
-  context.lineWidth = rune.state === "last" ? 250 : 25;
+  context.lineWidth = 25;
 
   context.lineCap = "round";
 
   let [pointA, pointB] = rune.vertices;
 
-  context.moveTo(pointB.x, pointB.y);
-
   context.beginPath();
 
-  for (let i = 1, len = rune.vertices.length; i < len; i++) {
-    const midPoint = getMidPoint(pointA, pointB);
+  if (rune.rendering.state !== "") {
+    context.arc(pointA.x, pointA.y, rune.rendering.radius, 0, 2 * Math.PI);
 
-    context.quadraticCurveTo(pointA.x, pointA.y, midPoint.x, midPoint.y);
+    context.fillStyle = rune.rendering.colour;
 
-    pointA = rune.vertices[i];
+    context.fill();
+  } else {
+    context.moveTo(pointB.x, pointB.y);
 
-    pointB = rune.vertices[i + 1];
+    for (let i = 1, len = rune.vertices.length; i < len; i++) {
+      const midPoint = getMidPoint(pointA, pointB);
+
+      context.quadraticCurveTo(pointA.x, pointA.y, midPoint.x, midPoint.y);
+
+      pointA = rune.vertices[i];
+
+      pointB = rune.vertices[i + 1];
+    }
+
+    context.lineTo(pointA.x, pointA.y);
+
+    context.strokeStyle = rune.rendering.colour;
+
+    context.stroke();
   }
-
-  context.lineTo(pointA.x, pointA.y);
-
-  context.stroke();
 };
