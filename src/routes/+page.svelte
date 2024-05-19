@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<main>
+  <h1>Welcome to Runes</h1>
+
+  <h2><a href="/play">play</a></h2>
+</main>
+
+<style>
+  main {
+    margin: 1rem;
+  }
+</style>
