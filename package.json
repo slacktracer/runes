@@ -41,6 +41,7 @@
 	"dependencies": {
 		"lazy-brush": "^2.0.1",
 		"nanoid": "^5.0.7",
+		"simplify-js": "^1.2.4",
 		"tsx": "^4.10.5",
 		"ws": "^8.17.0"
 	}
