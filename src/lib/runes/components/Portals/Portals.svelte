@@ -36,7 +36,9 @@
     tabindex="0"
   >
     <div class="incoming portal"></div>
-    <div bind:this={outgoingPortal} class="outgoing portal"></div>
+    <div bind:this={outgoingPortal} class="outgoing portal">
+      <slot name="o-portal" />
+    </div>
   </div>
 </section>
 
@@ -45,7 +47,6 @@
     display: grid;
     height: 100dvh;
     justify-content: center;
-    margin-top: 4rem;
     perspective: 500px;
     width: 100dvw;
   }
@@ -56,6 +57,7 @@
 
     all: unset;
     height: var(--portal-height);
+    margin-top: 4rem;
     position: relative;
     transform-style: preserve-3d;
     width: var(--portal-width);
