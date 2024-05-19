@@ -5,7 +5,7 @@
   import Portals from "../../lib/runes/components/Portals/Portals.svelte";
 
   if (browser) {
-    document.body.requestFullscreen();
+    document.body.requestFullscreen().catch(console.warn);
   }
 </script>
 

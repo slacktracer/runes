@@ -29,7 +29,7 @@
     canvasWidth = container.clientWidth * ratio;
 
     if (context) {
-      context.strokeStyle = $local.runeColour;
+      context.strokeStyle = $local.rune.colour;
 
       context.lineWidth = lineWidth;
 
@@ -42,7 +42,7 @@
       const loop = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        draw({ context, rune: $local.rune, runeColour: $local.runeColour });
+        draw({ context, rune: $local.rune });
 
         requestAnimationFrameID = requestAnimationFrame(loop);
       };

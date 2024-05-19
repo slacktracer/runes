@@ -6,12 +6,14 @@ export const start = (event: TouchEvent) => {
   const localStore = get(local);
 
   local.update((state) => {
-    state.rune.length = 0;
+    state.rune.vertices.length = 0;
 
     return state;
   });
 
-  const { stylus } = localStore;
+  const {
+    rune: { stylus },
+  } = localStore;
 
   const [{ clientX: x, clientY: y }] = event.changedTouches;
 

@@ -16,16 +16,16 @@ export const stop = () => {
 
   const { rune } = localStore;
 
-  const originalRune = structuredClone(simplify(rune));
+  const originalRuneVertices = structuredClone(simplify(rune));
 
   const intervalID = setInterval(() => {
     local.update((state) => {
-      state.rune = simplify(state.rune);
+      state.rune.vertices = simplify(state.rune.vertices);
 
-      const length = state.rune.length;
+      const length = state.rune.vertices.length;
 
       if (length < 3) {
-        const [first, last] = state.rune;
+        const [first, last] = state.rune.vertices;
 
         const legA = first.x - last.x;
         const legB = first.y - last.y;
@@ -37,7 +37,12 @@ export const stop = () => {
 
           clearInterval(intervalID);
 
-          launch({ rune: originalRune });
+          launch({
+            rune: {
+              ...state.rune,
+              vertices: originalRuneVertices,
+            },
+          });
 
           return state;
         }
@@ -66,7 +71,7 @@ export const stop = () => {
 
       const pointToRemove = randomInt(1, length - 2);
 
-      state.rune.splice(pointToRemove, 1);
+      state.rune.vertices.splice(pointToRemove, 1);
 
       return state;
     });

@@ -1,39 +1,37 @@
 import { getMidPoint } from "../../get-mid-point.js";
-import type { Point } from "../../types/Point.js";
+import type { Rune } from "../../types/Rune.js";
 
 export const draw = ({
   context,
   rune,
-  runeColour,
 }: {
   context: CanvasRenderingContext2D;
-  rune: Point[];
-  runeColour: string;
+  rune: Rune;
 }) => {
-  if (rune.length < 2) {
+  if (rune.vertices.length < 2) {
     return;
   }
 
-  context.strokeStyle = runeColour;
+  context.strokeStyle = rune.colour;
 
   context.lineWidth = rune.state === "last" ? 250 : 25;
 
   context.lineCap = "round";
 
-  let [pointA, pointB] = rune;
+  let [pointA, pointB] = rune.vertices;
 
   context.moveTo(pointB.x, pointB.y);
 
   context.beginPath();
 
-  for (let i = 1, len = rune.length; i < len; i++) {
+  for (let i = 1, len = rune.vertices.length; i < len; i++) {
     const midPoint = getMidPoint(pointA, pointB);
 
     context.quadraticCurveTo(pointA.x, pointA.y, midPoint.x, midPoint.y);
 
-    pointA = rune[i];
+    pointA = rune.vertices[i];
 
-    pointB = rune[i + 1];
+    pointB = rune.vertices[i + 1];
   }
 
   context.lineTo(pointA.x, pointA.y);

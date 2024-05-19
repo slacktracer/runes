@@ -4,5 +4,10 @@ import type { Rune } from "../../types/Rune.js";
 export const launch = ({ rune }: { rune: Rune }) => {
   const webSocket = connectToWebSocketServer();
 
-  webSocket?.send(JSON.stringify({ data: rune, type: "rune" }));
+  webSocket?.send(
+    JSON.stringify({
+      data: { ...rune, state: undefined, stylus: undefined },
+      type: "rune",
+    }),
+  );
 };
