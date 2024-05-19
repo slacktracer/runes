@@ -43,7 +43,7 @@
 <style>
   .portals-container {
     display: grid;
-    height: 100vh;
+    height: 100dvh;
     justify-content: center;
     margin-top: 4rem;
     perspective: 500px;
