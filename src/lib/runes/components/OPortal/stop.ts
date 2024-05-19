@@ -1,9 +1,10 @@
+import simplify from "simplify-js";
 import { get } from "svelte/store";
 
 import { local } from "../../local.js";
 import { launch } from "./launch.js";
 
-const randomInt = (min, max) => {
+const randomInt = (min: number, max: number) => {
   min = Math.ceil(min);
   max = Math.floor(max);
 
@@ -15,10 +16,12 @@ export const stop = () => {
 
   const { rune } = localStore;
 
-  const originalRune = structuredClone(rune);
+  const originalRune = structuredClone(simplify(rune));
 
   const intervalID = setInterval(() => {
     local.update((state) => {
+      state.rune = simplify(state.rune);
+
       const length = state.rune.length;
 
       if (length < 3) {
@@ -30,7 +33,7 @@ export const stop = () => {
         const distance = Math.sqrt(legA ** 2 + legB ** 2);
 
         if (distance === 0) {
-          rune.state = "last";
+          state.rune.state = "last";
 
           clearInterval(intervalID);
 
@@ -40,7 +43,6 @@ export const stop = () => {
         }
 
         const angle = Math.atan2(last.y - first.y, last.x - first.x);
-
         const velocity = Math.min(distance, 5);
         const sine = Math.sin(angle) * velocity;
         const cosine = Math.cos(angle) * velocity;
@@ -62,7 +64,7 @@ export const stop = () => {
         return state;
       }
 
-      const pointToRemove = randomInt(1, length - 1);
+      const pointToRemove = randomInt(1, length - 2);
 
       state.rune.splice(pointToRemove, 1);
 
