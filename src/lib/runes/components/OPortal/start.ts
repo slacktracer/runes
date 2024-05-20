@@ -24,5 +24,9 @@ export const start = (event: TouchEvent) => {
 
   const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-  stylus.update({ x, y }, { both: true });
+  if (event.target instanceof HTMLCanvasElement) {
+    const rect = event.target.getBoundingClientRect();
+
+    stylus.update({ x: x - rect.left, y: y - rect.top }, { both: true });
+  }
 };
