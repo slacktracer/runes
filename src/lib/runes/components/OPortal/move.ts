@@ -27,6 +27,8 @@ export const move = (event: TouchEvent) => {
 
       state.rune.rendering.vertices.push({ x: stylusX, y: stylusY });
 
+      state.rune.rendering.didMove = true;
+
       return state;
     });
   }

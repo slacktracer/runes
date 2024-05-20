@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
 
+import { getInitialRuneState } from "../../get-initial-rune-state.js";
 import { local } from "../../local.js";
 
 export const start = (event: TouchEvent) => {
@@ -10,11 +11,9 @@ export const start = (event: TouchEvent) => {
   }
 
   local.update((state) => {
-    state.rune.vertices.length = 0;
+    state.rune = getInitialRuneState();
 
-    state.rune.rendering.vertices.length = 0;
-
-    state.rune.rendering.isRendering;
+    state.rune.rendering.isRendering = true;
 
     return state;
   });

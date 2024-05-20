@@ -23,7 +23,7 @@ export const runPreLaunchAnimation = () => {
         }
 
         if (rune.rendering.state === "shrink") {
-          rune.rendering.radius -= 40;
+          rune.rendering.radius = Math.max(rune.rendering.radius - 40, 0);
         }
 
         if (rune.rendering.radius < 1) {

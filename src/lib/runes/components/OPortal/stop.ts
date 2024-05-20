@@ -1,18 +1,25 @@
 import simplify from "simplify-js";
 import { get } from "svelte/store";
 
-import { getInitialRuneState } from "../../get-initial-rune-state.js";
 import { local } from "../../local.js";
 import { launch } from "./launch.js";
 import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
 
 export const stop = async () => {
+  const localStore = get(local);
+
+  if (!localStore.rune.rendering.didMove) {
+    return;
+  }
+
   local.update((state) => {
     const vertices = simplify(state.rune.vertices);
 
     state.rune.vertices = vertices;
 
     state.rune.rendering.vertices = vertices;
+
+    localStore.rune.rendering.didMove = false;
 
     return state;
   });
@@ -22,12 +29,8 @@ export const stop = async () => {
   local.update((state) => {
     state.rune.rendering.isRendering = false;
 
-    state.rune = getInitialRuneState();
-
     return state;
   });
-
-  const localStore = get(local);
 
   const { rune } = localStore;
 

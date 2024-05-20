@@ -31,7 +31,7 @@ export const draw = ({
       return;
     }
 
-    context.moveTo(pointB.x, pointB.y);
+    context.moveTo(pointA.x, pointA.y);
 
     for (let i = 1, len = rune.rendering.vertices.length; i < len; i++) {
       const midPoint = getMidPoint(pointA, pointB);
