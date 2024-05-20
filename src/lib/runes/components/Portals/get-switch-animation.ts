@@ -10,7 +10,7 @@ export const getSwitchAnimation = ({
     { transform: "translateX(0px) translateZ(-40px)" },
   ],
   options: {
-    duration: 1000,
+    duration: 250,
     fill: "forwards",
   },
 });
