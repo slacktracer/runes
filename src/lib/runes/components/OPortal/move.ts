@@ -22,6 +22,26 @@ export const move = (event: TouchEvent) => {
 
     const { x: stylusX, y: stylusY } = stylus.getBrushCoordinates();
 
+    const distanceToBottom = event.target.clientHeight - stylusY;
+    const distanceToLeft = stylusX;
+    const distanceToRight = event.target.clientWidth - stylusX;
+    const distanceToTop = stylusY;
+
+    let outOfBounds = false;
+
+    if (
+      distanceToBottom < 0 ||
+      distanceToLeft < 0 ||
+      distanceToRight < 0 ||
+      distanceToTop < 0
+    ) {
+      outOfBounds = true;
+    }
+
+    if (outOfBounds) {
+      return;
+    }
+
     local.update((state) => {
       state.rune.vertices.push({ x: stylusX, y: stylusY });
 
