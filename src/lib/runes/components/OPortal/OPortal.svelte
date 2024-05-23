@@ -19,11 +19,9 @@
   let canvasWidth: number;
 
   onMount(() => {
-    let lineWidth = 25;
-
     const context = canvas.getContext("2d");
 
-    const ratio = 1;
+    const ratio = 2;
 
     canvasHeight = container.clientHeight * ratio;
     canvasWidth = container.clientWidth * ratio;

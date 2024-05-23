@@ -29,16 +29,17 @@
     display: flex;
     height: 100%;
     justify-content: center;
+    outline: none;
     perspective: 1010px;
     position: relative;
     top: -650px;
   }
 
   .shard {
-    --inner-shadow-blur: 80px;
+    --inner-shadow-blur: 50px;
     --inner-shadow-colour: #fff;
-    --shard-height: 600px;
-    --shard-thickness: 100px;
+    --shard-height: 500px;
+    --shard-thickness: 80px;
     --shard-width: 320px;
 
     display: flex;
@@ -51,7 +52,7 @@
 
   .side {
     backdrop-filter: blur(1px);
-    background: hsla(360, 10%, 10%, 0.6);
+    background: hsla(360, 5%, 5%, 0.6);
     box-shadow: 0 0 var(--inner-shadow-blur) var(--inner-shadow-colour) inset;
     display: flex;
     height: 100%;
@@ -76,7 +77,7 @@
     pointer-events: none;
   }
 
-  :is(.left, .right) {
+  :is(.left, .right, .top, .bottom) {
     backdrop-filter: blur(2px);
   }
 
@@ -95,7 +96,7 @@
 
   .right {
     transform: rotateY(90deg)
-      translateZ(calc(var(--shard-width) + (var(--shard-thickness) / -2)));
+      translateZ(calc(var(--shard-width) + (var(--shard-thickness) / 2) * -1));
     width: var(--shard-thickness);
   }
 
@@ -107,11 +108,15 @@
   .bottom {
     height: var(--shard-thickness);
     transform: rotateX(-90deg)
-      translateZ(calc(var(--shard-height) + (var(--shard-thickness) / -2)));
+      translateZ(
+        calc((var(--shard-height) + (var(--shard-thickness) / 2) * -1))
+      );
   }
 
   .transitionable {
-    transition: transform 0.8s;
+    transition: transform 500ms;
+    transition-timing-function: cubic-bezier(1, 0, 1, 1);
+    /*  ^ May only look good on high end mobiles...(?) */
   }
 
   .rotated {
