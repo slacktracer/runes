@@ -3,12 +3,14 @@ import type { Rune } from "./types/Rune.js";
 
 export const getInitialRuneState = (): Rune => ({
   rendering: {
-    colour: "hsla(46, 100%, 50%, 0.75)",
+    colour: "hsla(46, 100%, 50%, 0.7)",
     didMove: false,
     isRendering: false,
     radius: 15,
-    vertices: [],
+    shadowColour: "hsla(46, 100%, 50%, 0.4)",
+    shadowBlur: 8,
     state: "",
+    vertices: [],
     width: 15,
   },
   vertices: [],

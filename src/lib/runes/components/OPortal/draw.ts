@@ -8,11 +8,15 @@ export const draw = ({
   context: CanvasRenderingContext2D;
   rune: Rune;
 }) => {
-  context.strokeStyle = rune.rendering.colour;
-
   context.lineWidth = rune.rendering.width;
 
   context.lineCap = "round";
+
+  context.shadowBlur = rune.rendering.shadowBlur;
+
+  context.shadowColor = rune.rendering.shadowColour;
+
+  context.strokeStyle = rune.rendering.colour;
 
   let [pointA, pointB] = rune.rendering.vertices;
 

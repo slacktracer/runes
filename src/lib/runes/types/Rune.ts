@@ -7,6 +7,8 @@ export type Rune = {
     didMove: boolean;
     isRendering: boolean;
     radius: number;
+    shadowBlur: number;
+    shadowColour: string;
     state: string;
     vertices: Point[];
     width: number;
