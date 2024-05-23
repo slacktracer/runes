@@ -10,5 +10,5 @@
 </script>
 
 <Shard>
-  <OPortal slot="o-portal"></OPortal>
+  <OPortal height={500} slot="o-portal" width={320}></OPortal>
 </Shard>

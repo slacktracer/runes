@@ -8,10 +8,12 @@
   import { start } from "./start.js";
   import { stop } from "./stop.js";
 
+  export let height: number;
+  export let width: number;
+
   connectToWebSocketServer();
 
   let canvas: HTMLCanvasElement;
-  let container: HTMLDivElement;
 
   let requestAnimationFrameID: number;
 
@@ -21,10 +23,8 @@
   onMount(() => {
     const context = canvas.getContext("2d");
 
-    const ratio = 2;
-
-    canvasHeight = container.clientHeight * ratio;
-    canvasWidth = container.clientWidth * ratio;
+    canvasHeight = height || 200;
+    canvasWidth = width || 200;
 
     if (context) {
       canvas.addEventListener("touchstart", start);
@@ -48,19 +48,12 @@
   });
 </script>
 
-<div class="container" bind:this={container}>
-  <canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
-</div>
+<canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
 
 <style>
-  .container {
-    height: 600px;
-    pointer-events: auto;
-    width: 320px;
-    z-index: -2;
-  }
-
   canvas {
     touch-action: none;
+    pointer-events: auto;
+    z-index: -2;
   }
 </style>
