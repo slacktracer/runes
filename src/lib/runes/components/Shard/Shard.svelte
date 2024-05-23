@@ -31,11 +31,12 @@
     justify-content: center;
     perspective: 1010px;
     position: relative;
-    top: -350px;
+    top: -650px;
   }
 
   .shard {
-    --box-shadow-blur: 25px;
+    --inner-shadow-blur: 80px;
+    --inner-shadow-colour: #fff;
     --shard-height: 600px;
     --shard-thickness: 100px;
     --shard-width: 320px;
@@ -44,14 +45,14 @@
     height: var(--shard-height);
     position: relative;
     transform-style: preserve-3d;
-    translate: 0 400px 0;
+    translate: 0 700px 0;
     width: var(--shard-width);
   }
 
   .side {
     backdrop-filter: blur(1px);
-    background: hsla(360, 100%, 100%, 0.4);
-    box-shadow: 0 0 var(--box-shadow-blur) #000 inset;
+    background: hsla(360, 10%, 10%, 0.6);
+    box-shadow: 0 0 var(--inner-shadow-blur) var(--inner-shadow-colour) inset;
     display: flex;
     height: 100%;
     position: absolute;
@@ -110,7 +111,7 @@
   }
 
   .transitionable {
-    transition: transform 0.5s;
+    transition: transform 0.8s;
   }
 
   .rotated {
