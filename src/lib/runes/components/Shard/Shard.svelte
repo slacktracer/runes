@@ -36,6 +36,7 @@
   }
 
   .shard {
+    --half-shard-thickness: calc(var(--shard-thickness) / 2);
     --inner-shadow-blur: 50px;
     --inner-shadow-colour: #fff;
     --shard-height: 500px;
@@ -82,34 +83,34 @@
   }
 
   .front {
-    transform: translateZ(calc((var(--shard-thickness) / 2)));
+    transform: translateZ(calc((var(--half-shard-thickness))));
   }
 
   .back {
-    transform: rotateY(180deg) translateZ(calc(var(--shard-thickness) / 2));
+    transform: rotateY(180deg) translateZ(calc(var(--half-shard-thickness)));
   }
 
   .left {
-    transform: rotateY(-90deg) translateZ(calc((var(--shard-thickness) / 2)));
+    transform: rotateY(-90deg) translateZ(calc((var(--half-shard-thickness))));
     width: var(--shard-thickness);
   }
 
   .right {
     transform: rotateY(90deg)
-      translateZ(calc(var(--shard-width) + (var(--shard-thickness) / 2) * -1));
+      translateZ(calc(var(--shard-width) + (var(--half-shard-thickness)) * -1));
     width: var(--shard-thickness);
   }
 
   .top {
     height: var(--shard-thickness);
-    transform: rotateX(90deg) translateZ(calc(var(--shard-thickness) / 2));
+    transform: rotateX(90deg) translateZ(calc(var(--half-shard-thickness)));
   }
 
   .bottom {
     height: var(--shard-thickness);
     transform: rotateX(-90deg)
       translateZ(
-        calc((var(--shard-height) + (var(--shard-thickness) / 2) * -1))
+        calc((var(--shard-height) + (var(--half-shard-thickness)) * -1))
       );
   }
 
