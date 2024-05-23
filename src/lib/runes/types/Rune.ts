@@ -9,6 +9,7 @@ export type Rune = {
     radius: number;
     state: string;
     vertices: Point[];
+    width: number;
   };
   vertices: Point[];
   stylus: LazyBrush;

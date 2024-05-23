@@ -4,7 +4,10 @@ import { local } from "../../local.js";
 
 export const move = (event: TouchEvent) => {
   const {
-    rune: { stylus },
+    rune: {
+      rendering: { width },
+      stylus,
+    },
   } = get(local);
 
   if (event.target instanceof HTMLCanvasElement) {
@@ -30,10 +33,10 @@ export const move = (event: TouchEvent) => {
     let outOfBounds = false;
 
     if (
-      distanceToBottom < 0 ||
-      distanceToLeft < 0 ||
-      distanceToRight < 0 ||
-      distanceToTop < 0
+      distanceToBottom < width ||
+      distanceToLeft < width ||
+      distanceToRight < width ||
+      distanceToTop < width
     ) {
       outOfBounds = true;
     }

@@ -29,12 +29,6 @@
     canvasWidth = container.clientWidth * ratio;
 
     if (context) {
-      context.strokeStyle = $local.rune.rendering.colour;
-
-      context.lineWidth = lineWidth;
-
-      context.lineCap = "round";
-
       canvas.addEventListener("touchstart", start);
       canvas.addEventListener("touchend", stop);
       canvas.addEventListener("touchmove", move);
@@ -63,7 +57,9 @@
 <style>
   .container {
     height: 600px;
-    width: 300px;
+    pointer-events: auto;
+    width: 320px;
+    z-index: -2;
   }
 
   canvas {

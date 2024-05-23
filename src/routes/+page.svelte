@@ -1,7 +1,7 @@
 <main>
   <h1>Welcome to Runes</h1>
 
-  <h2><a href="/play">play</a></h2>
+  <h2><a href="/play/shard">play</a></h2>
 </main>
 
 <style>

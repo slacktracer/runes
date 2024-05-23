@@ -9,6 +9,7 @@ export const getInitialRuneState = (): Rune => ({
     radius: 25,
     vertices: [],
     state: "",
+    width: 25,
   },
   vertices: [],
   stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),

@@ -8,7 +8,9 @@ export const draw = ({
   context: CanvasRenderingContext2D;
   rune: Rune;
 }) => {
-  context.lineWidth = 25;
+  context.strokeStyle = rune.rendering.colour;
+
+  context.lineWidth = rune.rendering.width;
 
   context.lineCap = "round";
 
