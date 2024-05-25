@@ -14,9 +14,9 @@ export const draw = ({
 
   context.shadowBlur = rune.rendering.shadowBlur;
 
-  context.shadowColor = rune.rendering.shadowColour;
+  context.shadowColor = rune.rendering.shadowColour.value;
 
-  context.strokeStyle = rune.rendering.colour;
+  context.strokeStyle = rune.rendering.colour.value;
 
   let [pointA, pointB] = rune.rendering.vertices;
 
@@ -29,7 +29,7 @@ export const draw = ({
 
     context.arc(pointA.x, pointA.y, rune.rendering.radius, 0, 2 * Math.PI);
 
-    context.fillStyle = rune.rendering.colour;
+    context.fillStyle = rune.rendering.colour.value;
 
     context.fill();
   } else {
@@ -51,7 +51,7 @@ export const draw = ({
 
     context.lineTo(pointA.x, pointA.y);
 
-    context.strokeStyle = rune.rendering.colour;
+    context.strokeStyle = rune.rendering.colour.value;
 
     context.stroke();
   }
