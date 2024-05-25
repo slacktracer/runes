@@ -1,33 +1,23 @@
+import { Tween } from "@tweenjs/tween.js";
+
 import { browser } from "$app/environment";
 
-const alpha = 0.005;
-const iterationInterval = 16;
+const currentState = { radius: 1000 };
 
-let currentState = 100;
+const radiusTween = new Tween(currentState);
+
+radiusTween.to({ radius: 0 }, 500);
+
+const iterationInterval = 16;
 
 let accumulator = 0;
 let previousTimestamp: number;
 
-const lerp = ({
-  alpha,
-  end,
-  start,
-}: {
-  alpha: number;
-  end: number;
-  start: number;
-}) => {
-  return start * (1 - alpha) + end * alpha;
-};
-
 const start = Date.now();
 
-let frames = 0;
-let iterations = 0;
+radiusTween.start(performance.now());
 
 function step(timestamp: number) {
-  frames += 1;
-
   const timeSinceLastFrame = Math.min(
     previousTimestamp ? timestamp - previousTimestamp : iterationInterval,
     25,
@@ -38,25 +28,21 @@ function step(timestamp: number) {
   accumulator += timeSinceLastFrame;
 
   while (accumulator >= iterationInterval) {
-    iterations += 1;
-
-    currentState = lerp({ alpha: alpha, end: 0, start: currentState });
+    radiusTween.update(previousTimestamp + iterationInterval);
 
     accumulator -= iterationInterval;
   }
 
-  const stateToRender = Math.round(
-    lerp({
-      alpha: (accumulator / iterationInterval) * alpha,
-      end: 0,
-      start: currentState,
-    }),
-  );
+  radiusTween.update(timestamp);
+
+  console.log(currentState);
+
+  const stateToRender = Math.round(currentState.radius);
 
   if (Date.now() - start < 1000) {
     requestAnimationFrame(step);
   } else {
-    console.log({ frames, iterations, currentState, stateToRender });
+    console.log({ currentState, stateToRender });
   }
 }
 

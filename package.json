@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@tweenjs/tween.js": "^23.1.2",
 		"lazy-brush": "^2.0.1",
 		"nanoid": "^5.0.7",
 		"simplify-js": "^1.2.4",
