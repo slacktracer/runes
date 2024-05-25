@@ -39,11 +39,7 @@ export const connectToWebSocketServer = () => {
     const parsedData = JSON.parse(event?.data);
 
     if (parsedData.type === "rune") {
-      local.update((state) => {
-        state.incomingRune.push(parsedData.data.data);
-
-        return state;
-      });
+      // local.update((state) => {});
     }
   });
 
