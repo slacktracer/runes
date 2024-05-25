@@ -116,11 +116,10 @@
 
   .transitionable {
     transition: transform 500ms;
-    transition-timing-function: cubic-bezier(1, 0, 1, 1);
-    /*  ^ May only look good on high end mobiles...(?) */
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 
   .rotated {
-    transform: rotateY(180deg);
+    transform: rotateX(180deg);
   }
 </style>
