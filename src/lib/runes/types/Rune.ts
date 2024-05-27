@@ -3,6 +3,7 @@ import type { LazyBrush } from "./LazyBrush.js";
 import type { Point } from "./Point.js";
 
 export type Rune = {
+  dimensions: { left: number; height: number; top: number; width: number };
   rendering: {
     colour: HSLA;
     didMove: boolean;

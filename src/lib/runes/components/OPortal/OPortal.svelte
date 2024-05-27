@@ -2,11 +2,11 @@
   import { onMount } from "svelte";
 
   import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
-  import { local } from "../../local.js";
+  import { gameState } from "../../game-state.js";
+  import { mainEventBus } from "../../main-event-bus.js";
+  import { input } from "../../modules/rune/input.js";
+  import { updateRune } from "../../modules/rune/update-rune.js";
   import { draw } from "./draw.js";
-  import { move } from "./move.js";
-  import { start } from "./start.js";
-  import { stop } from "./stop.js";
 
   export let height: number;
   export let width: number;
@@ -14,8 +14,6 @@
   connectToWebSocketServer();
 
   let canvas: HTMLCanvasElement;
-
-  let requestAnimationFrameID: number;
 
   let canvasHeight: number;
   let canvasWidth: number;
@@ -26,25 +24,45 @@
     canvasHeight = height || 200;
     canvasWidth = width || 200;
 
-    if (context) {
-      canvas.addEventListener("touchstart", start);
-      canvas.addEventListener("touchend", stop);
-      canvas.addEventListener("touchmove", move);
+    if (context && mainEventBus) {
+      const { rune } = gameState;
 
-      const loop = () => {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+      const { left, top } = canvas.getBoundingClientRect();
 
-        draw({ context, rune: $local.rune });
+      rune.dimensions.left = left;
+      rune.dimensions.top = top;
 
-        requestAnimationFrameID = requestAnimationFrame(loop);
-      };
+      canvas.addEventListener("touchstart", (event: TouchEvent) => {
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-      loop();
+        input.touchStart = true;
+        input.touchStartPosition = { x, y };
+      });
+
+      canvas.addEventListener("touchend", (event: TouchEvent) => {
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
+
+        input.touchEnd = true;
+        input.touchEndPosition = { x, y };
+      });
+
+      canvas.addEventListener("touchmove", (event: TouchEvent) => {
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
+
+        input.touchMove = true;
+        input.touchMovePosition = { x, y };
+      });
+
+      if (mainEventBus) {
+        mainEventBus.on("tick", ({ detail: timestamp }: CustomEvent) => {
+          updateRune({ rune, timestamp });
+
+          context.clearRect(0, 0, canvas.width, canvas.height);
+
+          draw({ context, rune });
+        });
+      }
     }
-
-    return () => {
-      cancelAnimationFrame(requestAnimationFrameID);
-    };
   });
 </script>
 

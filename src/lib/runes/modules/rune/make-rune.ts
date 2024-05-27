@@ -1,8 +1,11 @@
-import { HSLA } from "./HSLA.js";
-import { makeStylus } from "./make-stylus.js";
-import type { Rune } from "./types/Rune.js";
+import { HSLA } from "../../HSLA.js";
+import { makeStylus } from "../../make-stylus.js";
+import type { Rune } from "../../types/Rune.js";
 
-export const getInitialRuneState = (): Rune => ({
+export const makeRune = ({
+  dimensions = { left: 0, height: 500, top: 0, width: 320 },
+} = {}): Rune => ({
+  dimensions,
   rendering: {
     colour: new HSLA({ h: 46, s: 100, l: 50, a: 0.7 }),
     didMove: false,
