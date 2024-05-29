@@ -36,21 +36,21 @@
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
         input.touchStart = true;
-        input.touchStartPosition = { x, y };
+        input.touchPosition = { x, y };
       });
 
       canvas.addEventListener("touchend", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
         input.touchEnd = true;
-        input.touchEndPosition = { x, y };
+        input.touchPosition = { x, y };
       });
 
       canvas.addEventListener("touchmove", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
         input.touchMove = true;
-        input.touchMovePosition = { x, y };
+        input.touchPosition = { x, y };
       });
 
       if (mainEventBus) {

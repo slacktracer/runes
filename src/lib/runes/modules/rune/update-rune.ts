@@ -1,95 +1,96 @@
 import simplify from "simplify-js";
 
-// import { launch } from "../../components/OPortal/launch.js";
-import { runPreLaunchAnimation } from "../../components/OPortal/run-pre-launch-animation.js";
 import type { Rune } from "../../types/Rune.js";
 import { input } from "./input.js";
-import { makeRune } from "./make-rune.js";
+import { isOutOfBounds } from "./is-out-of-bounds.js";
+import { launchRune } from "./launch-rune.js";
+import { resetRune } from "./reset-rune.js";
+import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
 
-export const updateRune = ({ rune }: { rune: Rune; timestamp: number }) => {
-  if (input.touchStart) {
-    Object.assign(rune, makeRune({ dimensions: rune.dimensions }));
-
-    rune.rendering.isRendering = true;
-
-    const { x, y } = input.touchStartPosition;
-
-    rune.stylus.update(
-      { x: x - rune.dimensions.left, y: y - rune.dimensions.top },
-      { both: true },
-    );
-  }
-
-  if (input.touchMove) {
-    const { x, y } = input.touchMovePosition;
-
-    rune.stylus.update(
-      { x: x - rune.dimensions.left, y: y - rune.dimensions.top },
-      { friction: 0.1 },
-    );
-
-    const hasMoved = rune.stylus.brushHasMoved();
-
-    if (!hasMoved) {
-      return;
-    }
-  }
-
-  if (input.touchEnd) {
-    rune.rendering.isRendering = false;
-
-    rune.vertices = simplify(rune.vertices);
-  }
-
-  if (input.touchStart || input.touchMove) {
-    const { x: stylusX, y: stylusY } = rune.stylus.getBrushCoordinates();
-
-    const distanceToBottom = rune.dimensions.height - stylusY;
-    const distanceToLeft = stylusX;
-    const distanceToRight = rune.dimensions.width - stylusX;
-    const distanceToTop = stylusY;
-
-    let outOfBounds = false;
-
-    if (
-      distanceToBottom < rune.rendering.width ||
-      distanceToLeft < rune.rendering.width ||
-      distanceToRight < rune.rendering.width ||
-      distanceToTop < rune.rendering.width
-    ) {
-      outOfBounds = true;
-    }
+export const updateRune = ({
+  rune,
+  timestamp,
+}: {
+  rune: Rune;
+  timestamp: number;
+}) => {
+  if (
+    (input.touchEnd || input.touchMove || input.touchStart) &&
+    rune.state !== "finishing"
+  ) {
+    const outOfBounds = isOutOfBounds({
+      height: rune.dimensions.height,
+      margin: rune.rendering.thickness,
+      width: rune.dimensions.width,
+      x: input.touchPosition.x - rune.dimensions.left,
+      y: input.touchPosition.y - rune.dimensions.top,
+    });
 
     if (outOfBounds) {
       return;
     }
 
-    rune.vertices.push({ x: stylusX, y: stylusY });
+    if (input.touchStart) {
+      input.touchStart = false;
 
-    rune.rendering.vertices.push({ x: stylusX, y: stylusY });
+      resetRune({ rune });
+
+      rune.stylus.update(
+        {
+          x: input.touchPosition.x - rune.dimensions.left,
+          y: input.touchPosition.y - rune.dimensions.top,
+        },
+        { both: true },
+      );
+
+      return;
+    }
+
+    if (input.touchMove) {
+      input.touchMove = false;
+
+      rune.stylus.update(
+        {
+          x: input.touchPosition.x - rune.dimensions.left,
+          y: input.touchPosition.y - rune.dimensions.top,
+        },
+        { friction: 0.1 },
+      );
+
+      const hasMoved = rune.stylus.brushHasMoved();
+
+      if (!hasMoved) {
+        return;
+      }
+    }
+
+    if (input.touchEnd) {
+      input.touchEnd = false;
+
+      const simplifiedVertices = simplify(rune.vertices);
+
+      rune.rendering.vertices = simplifiedVertices;
+      rune.vertices = simplifiedVertices;
+
+      rune.state = "finishing";
+    }
+
+    const { x, y } = rune.stylus.getBrushCoordinates();
+
+    rune.vertices.push({ x, y });
+
+    rune.rendering.vertices.push({ x, y });
   }
 
-  if (input.touchEnd) {
-    rune.rendering.didMove = false;
+  if (rune.state === "finishing") {
+    runPreLaunchAnimation({ rune, timestamp });
 
-    input.touchEnd = false;
+    if (rune.rendering.vertices.length === 1) {
+      rune.state = undefined;
 
-    runPreLaunchAnimation({ rune }).then(() => {
-      rune.rendering.isRendering = false;
-    });
-    // launch({
-    //   rune,
-    // });
-    return;
-  }
-
-  rune.rendering.didMove = true;
-
-  if (input.touchStart) {
-    input.touchStart = false;
-  }
-
-  if (input.touchMove) {
-    input.touchMove = false;
+      launchRune({
+        rune,
+      });
+    }
   }
 };

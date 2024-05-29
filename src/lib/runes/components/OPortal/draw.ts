@@ -8,7 +8,7 @@ export const draw = ({
   context: CanvasRenderingContext2D;
   rune: Rune;
 }) => {
-  context.lineWidth = rune.rendering.width;
+  context.lineWidth = rune.rendering.thickness;
 
   context.lineCap = "round";
 

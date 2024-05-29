@@ -6,15 +6,16 @@ export type Rune = {
   dimensions: { left: number; height: number; top: number; width: number };
   rendering: {
     colour: HSLA;
-    didMove: boolean;
-    isRendering: boolean;
     radius: number;
+    runningPreLaunchAnimation: false | number;
+    runningPreLaunchAnimationAccumulator: number;
     shadowBlur: number;
     shadowColour: HSLA;
     state: string;
+    thickness: number;
     vertices: Point[];
-    width: number;
   };
   vertices: Point[];
+  state: undefined | "starting" | "carving" | "finishing";
   stylus: LazyBrush;
 };
