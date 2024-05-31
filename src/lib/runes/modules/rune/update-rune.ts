@@ -31,6 +31,8 @@ export const updateRune = ({
   }
 
   if (input.touchMove && rune.state !== "finishing") {
+    input.touchMove = false;
+
     const outOfBounds = isOutOfBounds({
       height: rune.dimensions.height,
       thickness: rune.rendering.thickness,
@@ -40,10 +42,22 @@ export const updateRune = ({
     });
 
     if (outOfBounds) {
+      if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
+        const timeOutOfBounds = timestamp - rune.outOfBounds.outOfBoundsAt;
+
+        if (timeOutOfBounds > rune.outOfBounds.maxTimeOutOfBounds) {
+          rune.state = "finishing";
+        }
+      }
+
+      if (rune.state !== "outOfBounds") {
+        rune.state = "outOfBounds";
+
+        rune.outOfBounds.outOfBoundsAt = timestamp;
+      }
+
       return;
     }
-
-    input.touchMove = false;
 
     rune.stylus.update(
       {
@@ -66,7 +80,7 @@ export const updateRune = ({
     rune.rendering.vertices.push({ x, y });
   }
 
-  if (input.touchEnd) {
+  if (input.touchEnd && rune.state !== "finishing") {
     input.touchEnd = false;
 
     const simplifiedVertices = simplify(rune.vertices);

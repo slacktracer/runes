@@ -6,6 +6,11 @@ export const makeRune = ({
   dimensions = { left: 0, height: 500, top: 0, width: 320 },
 } = {}): Rune => ({
   dimensions,
+  outOfBounds: {
+    isOutOfBounds: false,
+    maxTimeOutOfBounds: 1000,
+    outOfBoundsAt: undefined,
+  },
   rendering: {
     colour: new HSLA({ h: 46, s: 100, l: 50, a: 0.7 }),
     radius: 15,
