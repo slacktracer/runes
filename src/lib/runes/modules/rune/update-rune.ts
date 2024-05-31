@@ -14,7 +14,23 @@ export const updateRune = ({
   rune: Rune;
   timestamp: number;
 }) => {
-  if ((input.touchMove || input.touchStart) && rune.state !== "finishing") {
+  if (input.touchStart && rune.state !== "finishing") {
+    input.touchStart = false;
+
+    resetRune({ rune });
+
+    rune.stylus.update(
+      {
+        x: input.touchPosition.x - rune.dimensions.left,
+        y: input.touchPosition.y - rune.dimensions.top,
+      },
+      { both: true },
+    );
+
+    return;
+  }
+
+  if (input.touchMove && rune.state !== "finishing") {
     const outOfBounds = isOutOfBounds({
       height: rune.dimensions.height,
       thickness: rune.rendering.thickness,
@@ -27,38 +43,20 @@ export const updateRune = ({
       return;
     }
 
-    if (input.touchStart) {
-      input.touchStart = false;
+    input.touchMove = false;
 
-      resetRune({ rune });
+    rune.stylus.update(
+      {
+        x: input.touchPosition.x - rune.dimensions.left,
+        y: input.touchPosition.y - rune.dimensions.top,
+      },
+      { friction: 0.01 },
+    );
 
-      rune.stylus.update(
-        {
-          x: input.touchPosition.x - rune.dimensions.left,
-          y: input.touchPosition.y - rune.dimensions.top,
-        },
-        { both: true },
-      );
+    const hasMoved = rune.stylus.brushHasMoved();
 
+    if (!hasMoved) {
       return;
-    }
-
-    if (input.touchMove) {
-      input.touchMove = false;
-
-      rune.stylus.update(
-        {
-          x: input.touchPosition.x - rune.dimensions.left,
-          y: input.touchPosition.y - rune.dimensions.top,
-        },
-        { friction: 0.1 },
-      );
-
-      const hasMoved = rune.stylus.brushHasMoved();
-
-      if (!hasMoved) {
-        return;
-      }
     }
 
     const { x, y } = rune.stylus.getBrushCoordinates();
