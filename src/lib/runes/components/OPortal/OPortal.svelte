@@ -4,7 +4,7 @@
   import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
   import { gameState } from "../../game-state.js";
   import { mainEventBus } from "../../main-event-bus.js";
-  import { input } from "../../modules/rune/input.js";
+  import { runeInput } from "../../modules/rune/rune-input.js";
   import { updateRune } from "../../modules/rune/update-rune.js";
   import { draw } from "./draw.js";
 
@@ -35,22 +35,22 @@
       canvas.addEventListener("touchstart", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-        input.touchStart = true;
-        input.touchPosition = { x, y };
+        runeInput.touchStart = true;
+        runeInput.touchPosition = { x, y };
       });
 
       canvas.addEventListener("touchend", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-        input.touchEnd = true;
-        input.touchPosition = { x, y };
+        runeInput.touchEnd = true;
+        runeInput.touchPosition = { x, y };
       });
 
       canvas.addEventListener("touchmove", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-        input.touchMove = true;
-        input.touchPosition = { x, y };
+        runeInput.touchMove = true;
+        runeInput.touchPosition = { x, y };
       });
 
       if (mainEventBus) {

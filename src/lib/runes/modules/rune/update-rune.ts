@@ -1,11 +1,12 @@
 import simplify from "simplify-js";
 
 import type { Rune } from "../../types/Rune.js";
-import { input } from "./input.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 import { launchRune } from "./launch-rune.js";
+import { resetInput } from "./reset-input.js";
 import { resetRune } from "./reset-rune.js";
 import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
+import { runeInput } from "./rune-input.js";
 
 export const updateRune = ({
   rune,
@@ -14,55 +15,53 @@ export const updateRune = ({
   rune: Rune;
   timestamp: number;
 }) => {
-  if (input.touchStart && rune.state !== "finishing") {
-    input.touchStart = false;
-
+  if (
+    runeInput.touchStart &&
+    rune.state !== "outOfBounds" &&
+    rune.state !== "finishing"
+  ) {
     resetRune({ rune });
 
     rune.stylus.update(
       {
-        x: input.touchPosition.x - rune.dimensions.left,
-        y: input.touchPosition.y - rune.dimensions.top,
+        x: runeInput.touchPosition.x - rune.dimensions.left,
+        y: runeInput.touchPosition.y - rune.dimensions.top,
       },
       { both: true },
     );
 
+    resetInput({ runeInput });
+
     return;
   }
 
-  if (input.touchMove && rune.state !== "finishing") {
-    input.touchMove = false;
-
+  if (
+    runeInput.touchMove &&
+    rune.state !== "outOfBounds" &&
+    rune.state !== "finishing"
+  ) {
     const outOfBounds = isOutOfBounds({
       height: rune.dimensions.height,
       thickness: rune.rendering.thickness,
       width: rune.dimensions.width,
-      x: input.touchPosition.x - rune.dimensions.left,
-      y: input.touchPosition.y - rune.dimensions.top,
+      x: runeInput.touchPosition.x - rune.dimensions.left,
+      y: runeInput.touchPosition.y - rune.dimensions.top,
     });
 
     if (outOfBounds) {
-      if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
-        const timeOutOfBounds = timestamp - rune.outOfBounds.outOfBoundsAt;
+      rune.state = "outOfBounds";
 
-        if (timeOutOfBounds > rune.outOfBounds.maxTimeOutOfBounds) {
-          rune.state = "finishing";
-        }
-      }
+      rune.outOfBounds.outOfBoundsAt = timestamp;
 
-      if (rune.state !== "outOfBounds") {
-        rune.state = "outOfBounds";
-
-        rune.outOfBounds.outOfBoundsAt = timestamp;
-      }
+      resetInput({ runeInput });
 
       return;
     }
 
     rune.stylus.update(
       {
-        x: input.touchPosition.x - rune.dimensions.left,
-        y: input.touchPosition.y - rune.dimensions.top,
+        x: runeInput.touchPosition.x - rune.dimensions.left,
+        y: runeInput.touchPosition.y - rune.dimensions.top,
       },
       { friction: 0.01 },
     );
@@ -70,6 +69,8 @@ export const updateRune = ({
     const hasMoved = rune.stylus.brushHasMoved();
 
     if (!hasMoved) {
+      resetInput({ runeInput });
+
       return;
     }
 
@@ -78,15 +79,19 @@ export const updateRune = ({
     rune.vertices.push({ x, y });
 
     rune.rendering.vertices.push({ x, y });
+
+    resetInput({ runeInput });
+
+    return;
   }
 
-  if (input.touchEnd && rune.state !== "finishing") {
-    input.touchEnd = false;
-
+  if (runeInput.touchEnd && rune.state !== "finishing") {
     const simplifiedVertices = simplify(rune.vertices);
 
-    if (simplifiedVertices.length < 8) {
+    if (simplifiedVertices.length < 4) {
       resetRune({ rune });
+
+      resetInput({ runeInput });
 
       return;
     }
@@ -95,17 +100,43 @@ export const updateRune = ({
     rune.vertices = simplifiedVertices;
 
     rune.state = "finishing";
+
+    resetInput({ runeInput });
+
+    return;
+  }
+
+  if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
+    resetInput({ runeInput });
+
+    const timeOutOfBounds = timestamp - rune.outOfBounds.outOfBoundsAt;
+
+    if (timeOutOfBounds > rune.outOfBounds.maxTimeOutOfBounds) {
+      rune.state = undefined;
+
+      runeInput.touchEnd = true;
+    }
+
+    resetInput({ runeInput });
+
+    return;
   }
 
   if (rune.state === "finishing") {
+    resetInput({ runeInput });
+
     runPreLaunchAnimation({ rune, timestamp });
 
-    if (rune.rendering.vertices.length === 1) {
+    if (rune.rendering.vertices.length <= 1) {
       rune.state = undefined;
 
       launchRune({
         rune,
       });
     }
+
+    resetInput({ runeInput });
+
+    return;
   }
 };
