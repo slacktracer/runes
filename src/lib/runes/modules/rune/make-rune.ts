@@ -19,5 +19,5 @@ export const makeRune = ({
   },
   vertices: [],
   state: undefined,
-  stylus: makeStylus({ initialPoint: { x: 0, y: 0 } }),
+  stylus: makeStylus({ initialPoint: { x: 0, y: 0 }, radius: 5 }),
 });

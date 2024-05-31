@@ -1,12 +1,12 @@
 export const isOutOfBounds = ({
   height,
-  margin,
+  thickness,
   width,
   x,
   y,
 }: {
   height: number;
-  margin: number;
+  thickness: number;
   width: number;
   x: number;
   y: number;
@@ -15,6 +15,8 @@ export const isOutOfBounds = ({
   const distanceToLeft = x;
   const distanceToRight = width - x;
   const distanceToTop = y;
+
+  const margin = Math.ceil(thickness * (2 / 3));
 
   let outOfBounds = false;
 
