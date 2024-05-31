@@ -35,6 +35,27 @@ export const updateRune = ({
     return;
   }
 
+  if (runeInput.touchEnd && rune.state !== "finishing") {
+    const simplifiedVertices = simplify(rune.vertices);
+
+    if (simplifiedVertices.length < 4) {
+      resetRune({ rune });
+
+      resetInput({ runeInput });
+
+      return;
+    }
+
+    rune.rendering.vertices = simplifiedVertices;
+    rune.vertices = simplifiedVertices;
+
+    rune.state = "finishing";
+
+    resetInput({ runeInput });
+
+    return;
+  }
+
   if (
     runeInput.touchMove &&
     rune.state !== "outOfBounds" &&
@@ -79,27 +100,6 @@ export const updateRune = ({
     rune.vertices.push({ x, y });
 
     rune.rendering.vertices.push({ x, y });
-
-    resetInput({ runeInput });
-
-    return;
-  }
-
-  if (runeInput.touchEnd && rune.state !== "finishing") {
-    const simplifiedVertices = simplify(rune.vertices);
-
-    if (simplifiedVertices.length < 4) {
-      resetRune({ rune });
-
-      resetInput({ runeInput });
-
-      return;
-    }
-
-    rune.rendering.vertices = simplifiedVertices;
-    rune.vertices = simplifiedVertices;
-
-    rune.state = "finishing";
 
     resetInput({ runeInput });
 
