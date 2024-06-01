@@ -24,12 +24,12 @@ export const updateRune = ({
     if (rune.rendering.vertices.length <= 1) {
       rune.state = undefined;
 
+      resetRune({ rune });
+
       launchRune({
         rune,
       });
     }
-
-    resetInput({ runeInput });
 
     return;
   }
