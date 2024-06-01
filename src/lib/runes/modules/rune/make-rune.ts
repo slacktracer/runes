@@ -8,7 +8,7 @@ export const makeRune = ({
   dimensions,
   outOfBounds: {
     isOutOfBounds: false,
-    maxTimeOutOfBounds: 1000,
+    maxTimeOutOfBounds: 500,
     outOfBoundsAt: undefined,
   },
   rendering: {
