@@ -1,5 +1,6 @@
 import type { Rune } from "../../types/Rune.js";
 import { handleEndInput } from "./handle-end-input.js";
+import { handleOutOfBoundsState } from "./handle-out-of-bounds-state.js";
 import { handleStartInput } from "./handle-start-input.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 import { launchRune } from "./launch-rune.js";
@@ -88,15 +89,7 @@ export const updateRune = ({
   if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
     resetInput({ runeInput });
 
-    const timeOutOfBounds = timestamp - rune.outOfBounds.outOfBoundsAt;
-
-    if (timeOutOfBounds > rune.outOfBounds.maxTimeOutOfBounds) {
-      rune.state = undefined;
-
-      runeInput.touchEnd = true;
-    }
-
-    resetInput({ runeInput });
+    runeInput.touchEnd = handleOutOfBoundsState({ rune, timestamp });
 
     return;
   }
