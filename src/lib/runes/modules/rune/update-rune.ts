@@ -1,6 +1,5 @@
-import simplify from "simplify-js";
-
 import type { Rune } from "../../types/Rune.js";
+import { handleTouchEndInput } from "./handle-touch-end-input.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 import { launchRune } from "./launch-rune.js";
 import { resetInput } from "./reset-input.js";
@@ -16,20 +15,7 @@ export const updateRune = ({
   timestamp: number;
 }) => {
   if (runeInput.touchEnd && rune.state !== "finishing") {
-    const simplifiedVertices = simplify(rune.vertices);
-
-    if (simplifiedVertices.length < 4) {
-      resetRune({ rune });
-
-      resetInput({ runeInput });
-
-      return;
-    }
-
-    rune.rendering.vertices = simplifiedVertices;
-    rune.vertices = simplifiedVertices;
-
-    rune.state = "finishing";
+    handleTouchEndInput({ rune });
 
     resetInput({ runeInput });
 
