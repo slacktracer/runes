@@ -1,5 +1,6 @@
 import type { Rune } from "../../types/Rune.js";
-import { handleTouchEndInput } from "./handle-touch-end-input.js";
+import { handleEndInput } from "./handle-end-input.js";
+import { handleStartInput } from "./handle-start-input.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 import { launchRune } from "./launch-rune.js";
 import { resetInput } from "./reset-input.js";
@@ -15,7 +16,7 @@ export const updateRune = ({
   timestamp: number;
 }) => {
   if (runeInput.touchEnd && rune.state !== "finishing") {
-    handleTouchEndInput({ rune });
+    handleEndInput({ rune });
 
     resetInput({ runeInput });
 
@@ -29,13 +30,7 @@ export const updateRune = ({
   ) {
     resetRune({ rune });
 
-    rune.stylus.update(
-      {
-        x: runeInput.touchPosition.x - rune.dimensions.left,
-        y: runeInput.touchPosition.y - rune.dimensions.top,
-      },
-      { both: true },
-    );
+    handleStartInput({ rune });
 
     resetInput({ runeInput });
 
