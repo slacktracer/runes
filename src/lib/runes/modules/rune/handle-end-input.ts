@@ -1,17 +1,15 @@
-import simplify from "simplify-js";
-
 import type { Rune } from "../../types/Rune.js";
 
 export const handleEndInput = ({ rune }: { rune: Rune }) => {
-  const simplifiedVertices = simplify(rune.vertices);
+  if (rune.vertices.length < 4) {
+    rune.vertices.length = 0;
 
-  if (simplifiedVertices.length < 4) {
+    rune.rendering.vertices.length = 0;
+
+    rune.state = undefined;
+
     return;
   }
-
-  rune.rendering.vertices = simplifiedVertices;
-
-  rune.vertices = simplifiedVertices;
 
   rune.state = "finishing";
 };

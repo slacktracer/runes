@@ -34,6 +34,20 @@ export const updateRune = ({
     return;
   }
 
+  if (rune.state === "outOfBounds") {
+    if (rune.outOfBounds.outOfBoundsAt) {
+      resetInput({ runeInput });
+
+      runeInput.touchEnd = handleOutOfBoundsState({ rune, timestamp });
+
+      return;
+    }
+
+    console.error("outOfBoundsAt is falsy");
+
+    return;
+  }
+
   if (runeInput.touchEnd) {
     handleEndInput({ rune });
 
@@ -42,7 +56,7 @@ export const updateRune = ({
     return;
   }
 
-  if (runeInput.touchStart && rune.state !== "outOfBounds") {
+  if (runeInput.touchStart) {
     resetRune({ rune });
 
     handleStartInput({ rune });
@@ -56,13 +70,5 @@ export const updateRune = ({
     handleMoveInput({ rune, runeInput, timestamp });
 
     resetInput({ runeInput });
-  }
-
-  if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
-    resetInput({ runeInput });
-
-    runeInput.touchEnd = handleOutOfBoundsState({ rune, timestamp });
-
-    return;
   }
 };
