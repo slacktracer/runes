@@ -1,8 +1,8 @@
 import type { Rune } from "../../types/Rune.js";
 import { handleEndInput } from "./handle-end-input.js";
+import { handleMoveInput } from "./handle-move-input.js";
 import { handleOutOfBoundsState } from "./handle-out-of-bounds-state.js";
 import { handleStartInput } from "./handle-start-input.js";
-import { isOutOfBounds } from "./is-out-of-bounds.js";
 import { launchRune } from "./launch-rune.js";
 import { resetInput } from "./reset-input.js";
 import { resetRune } from "./reset-rune.js";
@@ -16,84 +16,6 @@ export const updateRune = ({
   rune: Rune;
   timestamp: number;
 }) => {
-  if (runeInput.touchEnd && rune.state !== "finishing") {
-    handleEndInput({ rune });
-
-    resetInput({ runeInput });
-
-    return;
-  }
-
-  if (
-    runeInput.touchStart &&
-    rune.state !== "outOfBounds" &&
-    rune.state !== "finishing"
-  ) {
-    resetRune({ rune });
-
-    handleStartInput({ rune });
-
-    resetInput({ runeInput });
-
-    return;
-  }
-
-  if (runeInput.touchMove && rune.state !== "finishing") {
-    const outOfBounds = isOutOfBounds({
-      height: rune.dimensions.height,
-      thickness: rune.rendering.thickness,
-      width: rune.dimensions.width,
-      x: runeInput.touchPosition.x - rune.dimensions.left,
-      y: runeInput.touchPosition.y - rune.dimensions.top,
-    });
-
-    if (outOfBounds) {
-      rune.state = "outOfBounds";
-
-      rune.outOfBounds.outOfBoundsAt = timestamp;
-
-      resetInput({ runeInput });
-
-      return;
-    }
-
-    rune.state = undefined;
-
-    rune.stylus.update(
-      {
-        x: runeInput.touchPosition.x - rune.dimensions.left,
-        y: runeInput.touchPosition.y - rune.dimensions.top,
-      },
-      { friction: 0.01 },
-    );
-
-    const hasMoved = rune.stylus.brushHasMoved();
-
-    if (!hasMoved) {
-      resetInput({ runeInput });
-
-      return;
-    }
-
-    const { x, y } = rune.stylus.getBrushCoordinates();
-
-    rune.vertices.push({ x, y });
-
-    rune.rendering.vertices.push({ x, y });
-
-    resetInput({ runeInput });
-
-    return;
-  }
-
-  if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
-    resetInput({ runeInput });
-
-    runeInput.touchEnd = handleOutOfBoundsState({ rune, timestamp });
-
-    return;
-  }
-
   if (rune.state === "finishing") {
     resetInput({ runeInput });
 
@@ -108,6 +30,38 @@ export const updateRune = ({
     }
 
     resetInput({ runeInput });
+
+    return;
+  }
+
+  if (runeInput.touchEnd) {
+    handleEndInput({ rune });
+
+    resetInput({ runeInput });
+
+    return;
+  }
+
+  if (runeInput.touchStart && rune.state !== "outOfBounds") {
+    resetRune({ rune });
+
+    handleStartInput({ rune });
+
+    resetInput({ runeInput });
+
+    return;
+  }
+
+  if (runeInput.touchMove) {
+    handleMoveInput({ rune, runeInput, timestamp });
+
+    resetInput({ runeInput });
+  }
+
+  if (rune.state === "outOfBounds" && rune.outOfBounds.outOfBoundsAt) {
+    resetInput({ runeInput });
+
+    runeInput.touchEnd = handleOutOfBoundsState({ rune, timestamp });
 
     return;
   }
