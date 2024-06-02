@@ -1,13 +1,11 @@
-import "./make-rune-state-actor.js";
-
 import type { Rune } from "../../types/Rune.js";
 import { handleEndInput } from "./handle-end-input.js";
 import { handleMoveInput } from "./handle-move-input.js";
 import { handleOutOfBoundsState } from "./handle-out-of-bounds-state.js";
 import { handleStartInput } from "./handle-start-input.js";
 import { launchRune } from "./launch-rune.js";
-import { resetInput } from "./reset-input.js";
 import { resetRune } from "./reset-rune.js";
+import { resetRuneInput } from "./reset-rune-input.js";
 import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
 import { runeInput } from "./rune-input.js";
 
@@ -90,5 +88,5 @@ export const updateRune = ({
       break;
   }
 
-  resetInput({ runeInput });
+  resetRuneInput({ runeInput });
 };

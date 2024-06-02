@@ -1,6 +1,6 @@
 import { createActor, createMachine } from "xstate";
 
-export const makeRuneStateActor = () =>
+export const makeRuneState = () =>
   createActor(
     createMachine({
       id: "runeStateMachine",
@@ -30,16 +30,3 @@ export const makeRuneStateActor = () =>
       },
     }),
   );
-
-// const x = makeRuneStateActor().start();
-//
-// x.subscribe((snapshot) => {
-//   console.log("Value:", snapshot.value);
-// });
-//
-// x.send({ type: "start" });
-// x.send({ type: "move" });
-// const snapshot = x.getSnapshot();
-//
-// console.log(snapshot.matches("started"));
-// console.log(snapshot.matches("carving"));
