@@ -1,7 +1,13 @@
 import type { Rune } from "../../../types/Rune.js";
-import { runeInput } from "../rune-input.js";
+import type { RuneInput } from "../../../types/RuneInput";
 
-export const handleStartInput = ({ rune }: { rune: Rune }) => {
+export const handleStartInput = ({
+  rune,
+  runeInput,
+}: {
+  rune: Rune;
+  runeInput: RuneInput;
+}) => {
   rune.stylus.update(
     {
       x: runeInput.touchPosition.x - rune.dimensions.left,
