@@ -27,6 +27,8 @@ export const handleMoveInput = ({
     return false;
   }
 
+  rune.outOfBounds.outOfBoundsAt = undefined;
+
   rune.stylus.update(
     {
       x: runeInput.touchPosition.x - rune.dimensions.left,
