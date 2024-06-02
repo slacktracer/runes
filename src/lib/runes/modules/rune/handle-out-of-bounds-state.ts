@@ -15,8 +15,6 @@ export const handleOutOfBoundsState = ({
     timeOutOfBounds &&
     timeOutOfBounds > rune.outOfBounds.maxTimeOutOfBounds
   ) {
-    rune.state = undefined;
-
     return true;
   }
 

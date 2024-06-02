@@ -22,14 +22,10 @@ export const handleMoveInput = ({
   });
 
   if (outOfBounds) {
-    rune.state = "outOfBounds";
+    rune.outOfBounds.outOfBoundsAt ||= timestamp;
 
-    rune.outOfBounds.outOfBoundsAt = timestamp;
-
-    return;
+    return false;
   }
-
-  rune.state = undefined;
 
   rune.stylus.update(
     {
@@ -42,7 +38,7 @@ export const handleMoveInput = ({
   const hasMoved = rune.stylus.brushHasMoved();
 
   if (!hasMoved) {
-    return;
+    return true;
   }
 
   const { x, y } = rune.stylus.getBrushCoordinates();
@@ -57,5 +53,5 @@ export const handleMoveInput = ({
 
   rune.rendering.vertices = simplifiedVertices;
 
-  return;
+  return true;
 };

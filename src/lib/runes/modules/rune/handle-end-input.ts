@@ -6,10 +6,6 @@ export const handleEndInput = ({ rune }: { rune: Rune }) => {
 
     rune.rendering.vertices.length = 0;
 
-    rune.state = undefined;
-
     return;
   }
-
-  rune.state = "finishing";
 };

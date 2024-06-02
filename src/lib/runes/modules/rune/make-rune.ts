@@ -1,6 +1,7 @@
 import { HSLA } from "../../HSLA.js";
 import { makeStylus } from "../../make-stylus.js";
 import type { Rune } from "../../types/Rune.js";
+import { makeRuneStateActor } from "./make-rune-state-actor.js";
 
 export const makeRune = ({
   dimensions = { left: 0, height: 500, top: 0, width: 320 },
@@ -23,6 +24,6 @@ export const makeRune = ({
     vertices: [],
   },
   vertices: [],
-  state: undefined,
+  state: makeRuneStateActor().start(),
   stylus: makeStylus({ initialPoint: { x: 0, y: 0 }, radius: 5 }),
 });

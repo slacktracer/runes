@@ -21,6 +21,9 @@ export type Rune = {
     vertices: Point[];
   };
   vertices: Point[];
-  state: undefined | "starting" | "carving" | "outOfBounds" | "finishing";
+  state: {
+    getSnapshot: () => { value: string };
+    send: (parameters: { type: string }) => void;
+  };
   stylus: LazyBrush;
 };

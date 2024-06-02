@@ -1,3 +1,5 @@
+import "./make-rune-state-actor.js";
+
 import type { Rune } from "../../types/Rune.js";
 import { handleEndInput } from "./handle-end-input.js";
 import { handleMoveInput } from "./handle-move-input.js";
@@ -16,59 +18,77 @@ export const updateRune = ({
   rune: Rune;
   timestamp: number;
 }) => {
-  if (rune.state === "finishing") {
-    resetInput({ runeInput });
+  const runeState = rune.state.getSnapshot().value;
 
-    runPreLaunchAnimation({ rune, timestamp });
+  switch (runeState) {
+    case "ready":
+      if (runeInput.touchStart) {
+        handleStartInput({ rune });
 
-    if (rune.rendering.vertices.length <= 1) {
-      rune.state = undefined;
+        rune.state.send({ type: "start" });
+      }
 
-      resetRune({ rune });
+      break;
 
-      launchRune({
-        rune,
-      });
-    }
+    case "started":
+      if (runeInput.touchMove) {
+        handleMoveInput({ rune, runeInput, timestamp });
 
-    return;
+        rune.state.send({ type: "move" });
+      }
+
+      break;
+
+    case "carving":
+      if (runeInput.touchEnd) {
+        handleEndInput({ rune });
+
+        rune.state.send({ type: "end" });
+      }
+
+      if (runeInput.touchMove) {
+        const withinBounds = handleMoveInput({ rune, runeInput, timestamp });
+
+        if (withinBounds === false) {
+          rune.state.send({ type: "wentOutOfBounds" });
+        }
+      }
+
+      break;
+
+    case "outOfBounds":
+      if (runeInput.touchMove) {
+        const withinBounds = handleMoveInput({ rune, runeInput, timestamp });
+
+        if (withinBounds === true) {
+          rune.state.send({ type: "backWithinBounds" });
+
+          break;
+        }
+      }
+
+      {
+        const timeout = handleOutOfBoundsState({ rune, timestamp });
+
+        if (timeout) {
+          rune.state.send({ type: "end" });
+        }
+
+        break;
+      }
+    case "finishing":
+      runPreLaunchAnimation({ rune, timestamp });
+
+      if (rune.rendering.vertices.length <= 1) {
+        resetRune({ rune });
+
+        launchRune({
+          rune,
+        });
+      }
+
+      break;
   }
 
-  if (rune.state === "outOfBounds") {
-    if (rune.outOfBounds.outOfBoundsAt) {
-      resetInput({ runeInput });
-
-      runeInput.touchEnd = handleOutOfBoundsState({ rune, timestamp });
-
-      return;
-    }
-
-    console.error("outOfBoundsAt is falsy");
-
-    return;
-  }
-
-  if (runeInput.touchEnd) {
-    handleEndInput({ rune });
-
-    resetInput({ runeInput });
-
-    return;
-  }
-
-  if (runeInput.touchStart) {
-    resetRune({ rune });
-
-    handleStartInput({ rune });
-
-    resetInput({ runeInput });
-
-    return;
-  }
-
-  if (runeInput.touchMove) {
-    handleMoveInput({ rune, runeInput, timestamp });
-
-    resetInput({ runeInput });
-  }
+  resetInput({ runeInput });
 };
