@@ -1,6 +1,6 @@
 import type { Rune } from "../../../types/Rune.js";
 import type { RuneInput } from "../../../types/RuneInput.js";
-import { handleMoveInput } from "../handle-move-input.js";
+import { handleMoveInput } from "./handle-move-input.js";
 
 export const startedStateHandler = ({
   rune,

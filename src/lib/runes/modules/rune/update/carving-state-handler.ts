@@ -1,7 +1,7 @@
 import type { Rune } from "../../../types/Rune.js";
 import type { RuneInput } from "../../../types/RuneInput.js";
-import { handleEndInput } from "../handle-end-input.js";
-import { handleMoveInput } from "../handle-move-input.js";
+import { handleEndInput } from "./handle-end-input.js";
+import { handleMoveInput } from "./handle-move-input.js";
 
 export const carvingStateHandler = ({
   rune,

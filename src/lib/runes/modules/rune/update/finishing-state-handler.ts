@@ -1,7 +1,7 @@
 import type { Rune } from "../../../types/Rune.js";
 import { launchRune } from "../launch-rune.js";
 import { resetRune } from "../reset-rune.js";
-import { runPreLaunchAnimation } from "../run-pre-launch-animation.js";
+import { runPreLaunchAnimation } from "./run-pre-launch-animation.js";
 
 export const finishingStateHandler = ({
   rune,

@@ -1,5 +1,5 @@
-import type { Rune } from "../../types/Rune.js";
-import { runeInput } from "./rune-input.js";
+import type { Rune } from "../../../types/Rune.js";
+import { runeInput } from "../rune-input.js";
 
 export const handleStartInput = ({ rune }: { rune: Rune }) => {
   rune.stylus.update(

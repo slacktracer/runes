@@ -1,4 +1,4 @@
-import type { Rune } from "../../types/Rune.js";
+import type { Rune } from "../../../types/Rune.js";
 
 export const handleEndInput = ({ rune }: { rune: Rune }) => {
   if (rune.vertices.length < 4) {

@@ -1,7 +1,7 @@
 import simplify from "simplify-js";
 
-import type { Rune } from "../../types/Rune.js";
-import type { RuneInput } from "../../types/RuneInput.js";
+import type { Rune } from "../../../types/Rune.js";
+import type { RuneInput } from "../../../types/RuneInput.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 
 export const handleMoveInput = ({

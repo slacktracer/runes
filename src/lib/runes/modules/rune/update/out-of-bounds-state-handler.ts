@@ -1,7 +1,7 @@
 import type { Rune } from "../../../types/Rune.js";
 import type { RuneInput } from "../../../types/RuneInput.js";
-import { handleMoveInput } from "../handle-move-input.js";
-import { handleOutOfBoundsState } from "../handle-out-of-bounds-state.js";
+import { handleMoveInput } from "./handle-move-input.js";
+import { handleOutOfBoundsState } from "./handle-out-of-bounds-state.js";
 
 export const outOfBoundsStateHandler = ({
   rune,
