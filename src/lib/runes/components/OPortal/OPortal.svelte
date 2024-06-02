@@ -32,13 +32,6 @@
       rune.dimensions.left = left;
       rune.dimensions.top = top;
 
-      canvas.addEventListener("touchstart", (event: TouchEvent) => {
-        const [{ clientX: x, clientY: y }] = event.changedTouches;
-
-        runeInput.touchStart = true;
-        runeInput.touchPosition = { x, y };
-      });
-
       canvas.addEventListener("touchend", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
@@ -50,6 +43,13 @@
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
         runeInput.touchMove = true;
+        runeInput.touchPosition = { x, y };
+      });
+
+      canvas.addEventListener("touchstart", (event: TouchEvent) => {
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
+
+        runeInput.touchStart = true;
         runeInput.touchPosition = { x, y };
       });
 
