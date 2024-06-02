@@ -10,7 +10,7 @@ export const readyStateHandler = ({
   runeInput: RuneInput;
 }) => {
   if (runeInput.touchStart) {
-    handleStartInput({ rune });
+    handleStartInput({ rune, runeInput });
 
     rune.state.send({ type: "start" });
   }
