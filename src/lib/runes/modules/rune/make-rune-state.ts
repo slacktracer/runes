@@ -15,6 +15,7 @@ export const makeRuneState = () =>
         carving: {
           on: {
             end: { target: "finishingAndRunning" },
+            wasNotViable: { target: "finishingAndWithering" },
             wentOutOfBounds: { target: "outOfBounds" },
           },
         },
@@ -30,6 +31,7 @@ export const makeRuneState = () =>
         finishingAndTransmitting: {
           on: { end: { target: "ready" } },
         },
+        finishingAndWithering: { on: { end: { target: "ready" } } },
       },
     }),
   );

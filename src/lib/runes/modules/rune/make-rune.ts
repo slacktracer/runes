@@ -20,6 +20,12 @@ export const makeRune = ({
         to: { opacity: 0, radius: 200 },
         tween: false,
       },
+      withering: {
+        duration: 250,
+        from: { saturation: 100, thickness: 15 },
+        to: { saturation: 10, thickness: 0 },
+        tween: false,
+      },
     },
     colour: new HSLA({ h: 46, s: 100, l: 50, a: 0.7 }),
     radius: 15,

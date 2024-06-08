@@ -23,6 +23,16 @@ export type Rune = {
               update: () => void;
             };
       };
+      withering: {
+        duration: number;
+        from: { saturation: number; thickness: number };
+        to: { saturation: number; thickness: number };
+        tween:
+          | false
+          | {
+              update: () => void;
+            };
+      };
     };
     colour: HSLA;
     radius: number;

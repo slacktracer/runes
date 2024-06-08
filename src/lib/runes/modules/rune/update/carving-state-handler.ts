@@ -1,6 +1,5 @@
 import type { Rune } from "../../../types/Rune.js";
 import type { RuneInput } from "../../../types/RuneInput.js";
-import { handleEndInput } from "./handle-end-input.js";
 import { handleMoveInput } from "./handle-move-input.js";
 
 export const carvingStateHandler = ({
@@ -13,7 +12,11 @@ export const carvingStateHandler = ({
   timestamp: number;
 }) => {
   if (runeInput.touchEnd) {
-    handleEndInput({ rune });
+    if (rune.vertices.length < 4) {
+      rune.state.send({ type: "wasNotViable" });
+
+      return;
+    }
 
     rune.state.send({ type: "end" });
 
