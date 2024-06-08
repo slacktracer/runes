@@ -9,6 +9,8 @@ export const finishingAndWitheringStateHandler = ({ rune }: { rune: Rune }) => {
 
     rune.rendering.colour.saturation =
       rune.rendering.animations.withering.from.saturation;
+    rune.rendering.shadowColour.saturation =
+      rune.rendering.animations.withering.from.saturation;
     rune.rendering.thickness =
       rune.rendering.animations.withering.from.thickness;
 

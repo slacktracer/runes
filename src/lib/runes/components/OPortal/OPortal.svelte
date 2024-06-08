@@ -4,9 +4,9 @@
   import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
   import { gameState } from "../../game-state.js";
   import { mainEventBus } from "../../main-event-bus.js";
+  import { renderRune } from "../../modules/rune/render-rune.js";
   import { runeInput } from "../../modules/rune/rune-input.js";
   import { updateRune } from "../../modules/rune/update-rune.js";
-  import { draw } from "./draw.js";
 
   export let height: number;
   export let width: number;
@@ -19,12 +19,12 @@
   let canvasWidth: number;
 
   onMount(() => {
-    const context = canvas.getContext("2d");
+    const renderingContext = canvas.getContext("2d");
 
     canvasHeight = height || 200;
     canvasWidth = width || 200;
 
-    if (context && mainEventBus) {
+    if (renderingContext && mainEventBus) {
       const { rune } = gameState;
 
       const { left, top } = canvas.getBoundingClientRect();
@@ -57,9 +57,9 @@
         mainEventBus.on("tick", ({ detail: timestamp }: CustomEvent) => {
           updateRune({ rune, timestamp });
 
-          context.clearRect(0, 0, canvas.width, canvas.height);
+          renderingContext.clearRect(0, 0, canvas.width, canvas.height);
 
-          draw({ context, rune });
+          renderRune({ renderingContext, rune });
         });
       }
     }
