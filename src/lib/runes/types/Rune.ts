@@ -16,7 +16,7 @@ export type Rune = {
       transmitting: {
         duration: number;
         from: { opacity: number; radius: number };
-        to: { opacity: number; radius: number };
+        to: { opacity: number; radius: ({ rune }: { rune: Rune }) => number };
         tween:
           | false
           | {

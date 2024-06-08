@@ -23,7 +23,10 @@ export const finishingAndTransmittingStateHandler = ({
   )
     .easing(Easing.Quadratic.Out)
     .to(
-      rune.rendering.animations.transmitting.to,
+      {
+        opacity: rune.rendering.animations.transmitting.to.opacity,
+        radius: rune.rendering.animations.transmitting.to.radius({ rune }),
+      },
       rune.rendering.animations.transmitting.duration,
     )
     .onComplete(() => {

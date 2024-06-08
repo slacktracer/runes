@@ -12,7 +12,7 @@ export const carvingStateHandler = ({
   timestamp: number;
 }) => {
   if (runeInput.touchEnd) {
-    if (rune.vertices.length < 4) {
+    if (rune.vertices.length < 15) {
       rune.state.send({ type: "wasNotViable" });
 
       return;

@@ -17,7 +17,10 @@ export const makeRune = ({
       transmitting: {
         duration: 250,
         from: { opacity: 0.7, radius: 15 },
-        to: { opacity: 0, radius: 200 },
+        to: {
+          opacity: 0,
+          radius: ({ rune }) => rune.vertices.length * 3,
+        },
         tween: false,
       },
       withering: {

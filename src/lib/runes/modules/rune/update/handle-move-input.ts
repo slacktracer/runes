@@ -1,5 +1,3 @@
-import simplify from "simplify-js";
-
 import type { Rune } from "../../../types/Rune.js";
 import type { RuneInput } from "../../../types/RuneInput.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
@@ -48,12 +46,6 @@ export const handleMoveInput = ({
   rune.vertices.push({ x, y });
 
   rune.rendering.vertices.push({ x, y });
-
-  const simplifiedVertices = simplify(rune.vertices);
-
-  rune.vertices = simplifiedVertices;
-
-  rune.rendering.vertices = simplifiedVertices;
 
   return true;
 };

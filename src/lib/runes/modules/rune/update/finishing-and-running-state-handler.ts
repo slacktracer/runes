@@ -21,14 +21,14 @@ export const finishingAndRunningStateHandler = ({
 
   while (
     rune.rendering.vertices.length > 1 &&
-    rune.rendering.runningPreLaunchAnimationAccumulator > 16
+    rune.rendering.runningPreLaunchAnimationAccumulator > 8
   ) {
     rune.rendering.vertices = rune.rendering.vertices.slice(
       1,
       rune.rendering.vertices.length,
     );
 
-    rune.rendering.runningPreLaunchAnimationAccumulator -= 16;
+    rune.rendering.runningPreLaunchAnimationAccumulator -= 8;
   }
 
   if (rune.rendering.vertices.length <= 1) {
