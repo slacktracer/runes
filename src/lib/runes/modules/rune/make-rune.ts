@@ -23,7 +23,7 @@ export const makeRune = ({
       withering: {
         duration: 250,
         from: { saturation: 100, thickness: 15 },
-        to: { saturation: 10, thickness: 0 },
+        to: { saturation: 0, thickness: 0 },
         tween: false,
       },
     },
