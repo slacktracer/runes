@@ -8,27 +8,27 @@ export const finishingAndRunningStateHandler = ({
   rune: Rune;
   timestamp: number;
 }) => {
-  if (rune.rendering.runningPreLaunchAnimation === false) {
-    rune.rendering.runningPreLaunchAnimation = timestamp;
+  if (rune.animations.running.isRunning === false) {
+    rune.animations.running.isRunning = timestamp;
 
     return;
   }
 
-  rune.rendering.runningPreLaunchAnimationAccumulator +=
-    timestamp - rune.rendering.runningPreLaunchAnimation;
+  rune.animations.running.accumulator +=
+    timestamp - rune.animations.running.isRunning;
 
-  rune.rendering.runningPreLaunchAnimation = timestamp;
+  rune.animations.running.isRunning = timestamp;
 
   while (
     rune.rendering.vertices.length > 1 &&
-    rune.rendering.runningPreLaunchAnimationAccumulator > 8
+    rune.animations.running.accumulator > 8
   ) {
     rune.rendering.vertices = rune.rendering.vertices.slice(
       1,
       rune.rendering.vertices.length,
     );
 
-    rune.rendering.runningPreLaunchAnimationAccumulator -= 8;
+    rune.animations.running.accumulator -= 8;
   }
 
   if (rune.rendering.vertices.length <= 1) {

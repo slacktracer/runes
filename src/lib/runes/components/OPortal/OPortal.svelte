@@ -6,7 +6,7 @@
   import { mainEventBus } from "../../main-event-bus.js";
   import { renderRune } from "../../modules/rune/render-rune.js";
   import { runeInput } from "../../modules/rune/rune-input.js";
-  import { updateRune } from "../../modules/rune/update-rune.js";
+  import { updateRune } from "../../modules/rune/update-rune/update-rune.js";
 
   export let height: number;
   export let width: number;

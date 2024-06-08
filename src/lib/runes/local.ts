@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-import { makeStylus } from "./make-stylus.js";
+import { makeStylus } from "./modules/rune/make-rune/make-stylus.js";
 import type { LazyBrush } from "./types/LazyBrush.js";
 
 type LocalState = {

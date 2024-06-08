@@ -5,6 +5,32 @@ import type { LazyBrush } from "./LazyBrush.js";
 import type { Point } from "./Point.js";
 
 export type Rune = {
+  animations: {
+    growing: {
+      duration: number;
+      from: { opacity: number; radius: number };
+      to: { opacity: number; radius: ({ rune }: { rune: Rune }) => number };
+      tween:
+        | false
+        | {
+            update: () => void;
+          };
+    };
+    running: {
+      accumulator: number;
+      isRunning: false | number;
+    };
+    withering: {
+      duration: number;
+      from: { saturation: number; thickness: number };
+      to: { saturation: number; thickness: number };
+      tween:
+        | false
+        | {
+            update: () => void;
+          };
+    };
+  };
   dimensions: { left: number; height: number; top: number; width: number };
   outOfBounds: {
     isOutOfBounds: boolean;
@@ -12,32 +38,8 @@ export type Rune = {
     outOfBoundsAt: undefined | number;
   };
   rendering: {
-    animations: {
-      transmitting: {
-        duration: number;
-        from: { opacity: number; radius: number };
-        to: { opacity: number; radius: ({ rune }: { rune: Rune }) => number };
-        tween:
-          | false
-          | {
-              update: () => void;
-            };
-      };
-      withering: {
-        duration: number;
-        from: { saturation: number; thickness: number };
-        to: { saturation: number; thickness: number };
-        tween:
-          | false
-          | {
-              update: () => void;
-            };
-      };
-    };
     colour: HSLA;
     radius: number;
-    runningPreLaunchAnimation: false | number;
-    runningPreLaunchAnimationAccumulator: number;
     shadowBlur: number;
     shadowColour: HSLA;
     thickness: number;

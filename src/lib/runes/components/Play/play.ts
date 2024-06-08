@@ -1,7 +1,7 @@
 import { browser } from "$app/environment";
 
 import { gameState } from "../../game-state.js";
-import { makeRune } from "../../modules/rune/make-rune.js";
+import { makeRune } from "../../modules/rune/make-rune/make-rune.js";
 import { startTicking } from "../../start-ticking.js";
 
 if (browser) {

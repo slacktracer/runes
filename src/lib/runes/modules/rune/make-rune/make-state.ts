@@ -1,6 +1,6 @@
 import { createActor, createMachine } from "xstate";
 
-export const makeRuneState = () =>
+export const makeState = () =>
   createActor(
     createMachine({
       id: "runeStateMachine",

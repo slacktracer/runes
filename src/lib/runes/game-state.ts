@@ -1,4 +1,4 @@
-import { makeRune } from "./modules/rune/make-rune.js";
+import { makeRune } from "./modules/rune/make-rune/make-rune.js";
 import type { Rune } from "./types/Rune.js";
 
 type GameState = {

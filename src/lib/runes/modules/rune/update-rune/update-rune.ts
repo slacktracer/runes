@@ -1,7 +1,7 @@
-import type { Rune } from "../../types/Rune.js";
-import { resetRuneInput } from "./reset-rune-input.js";
-import { runeInput } from "./rune-input.js";
-import { updateHandlers } from "./update/update-handlers.js";
+import type { Rune } from "../../../types/Rune.js";
+import { resetRuneInput } from "../reset-rune-input.js";
+import { runeInput } from "../rune-input.js";
+import { updateHandlers } from "./update-handlers.js";
 
 export const updateRune = ({
   rune,
