@@ -26,9 +26,9 @@ export const makeState = () =>
           },
         },
         finishingAndRunning: {
-          on: { end: { target: "finishingAndTransmitting" } },
+          on: { end: { target: "finishingAndGrowing" } },
         },
-        finishingAndTransmitting: {
+        finishingAndGrowing: {
           on: { end: { target: "ready" } },
         },
         finishingAndWithering: { on: { end: { target: "ready" } } },

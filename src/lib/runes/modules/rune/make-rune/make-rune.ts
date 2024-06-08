@@ -7,8 +7,8 @@ import { makeState } from "./make-state.js";
 import { makeStylus } from "./make-stylus.js";
 
 export const makeRune = ({ dimensions = makeDimensions() } = {}): Rune => ({
-  dimensions,
   animations: makeAnimations(),
+  dimensions,
   outOfBounds: makeOutOfBounds(),
   rendering: makeRendering(),
   vertices: [],
