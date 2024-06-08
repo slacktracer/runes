@@ -1,3 +1,5 @@
+import type { StateValue, StateValueMap } from "xstate";
+
 import type { HSLA } from "../HSLA.js";
 import type { LazyBrush } from "./LazyBrush.js";
 import type { Point } from "./Point.js";
@@ -10,19 +12,30 @@ export type Rune = {
     outOfBoundsAt: undefined | number;
   };
   rendering: {
+    animations: {
+      transmitting: {
+        duration: number;
+        from: { opacity: number; radius: number };
+        to: { opacity: number; radius: number };
+        tween:
+          | false
+          | {
+              update: () => void;
+            };
+      };
+    };
     colour: HSLA;
     radius: number;
     runningPreLaunchAnimation: false | number;
     runningPreLaunchAnimationAccumulator: number;
     shadowBlur: number;
     shadowColour: HSLA;
-    state: string;
     thickness: number;
     vertices: Point[];
   };
   vertices: Point[];
   state: {
-    getSnapshot: () => { value: string };
+    getSnapshot: () => { value: StateValue | StateValueMap };
     send: (parameters: { type: string }) => void;
   };
   stylus: LazyBrush;

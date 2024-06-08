@@ -13,13 +13,20 @@ export const makeRune = ({
     outOfBoundsAt: undefined,
   },
   rendering: {
+    animations: {
+      transmitting: {
+        duration: 250,
+        from: { opacity: 0.7, radius: 15 },
+        to: { opacity: 0, radius: 200 },
+        tween: false,
+      },
+    },
     colour: new HSLA({ h: 46, s: 100, l: 50, a: 0.7 }),
     radius: 15,
     runningPreLaunchAnimation: false,
     runningPreLaunchAnimationAccumulator: 0,
     shadowColour: new HSLA({ h: 46, s: 100, l: 50, a: 0.4 }),
     shadowBlur: 10,
-    state: "",
     thickness: 15,
     vertices: [],
   },

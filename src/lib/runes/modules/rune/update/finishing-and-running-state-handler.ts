@@ -1,6 +1,7 @@
 import type { Rune } from "../../../types/Rune.js";
+import { launchRune } from "../launch-rune.js";
 
-export const runPreLaunchAnimation = ({
+export const finishingAndRunningStateHandler = ({
   rune,
   timestamp,
 }: {
@@ -28,5 +29,13 @@ export const runPreLaunchAnimation = ({
     );
 
     rune.rendering.runningPreLaunchAnimationAccumulator -= 16;
+  }
+
+  if (rune.rendering.vertices.length <= 1) {
+    rune.state.send({ type: "end" });
+
+    launchRune({
+      rune,
+    });
   }
 };

@@ -22,7 +22,7 @@ export const draw = ({
 
   context.beginPath();
 
-  if (rune.rendering.state !== "") {
+  if (rune.state.getSnapshot().value === "finishingAndTransmitting") {
     if (!pointA) {
       return;
     }

@@ -14,18 +14,21 @@ export const makeRuneState = () =>
         },
         carving: {
           on: {
-            end: { target: "finishing" },
+            end: { target: "finishingAndRunning" },
             wentOutOfBounds: { target: "outOfBounds" },
           },
         },
         outOfBounds: {
           on: {
             backWithinBounds: { target: "carving" },
-            end: { target: "finishing" },
+            end: { target: "finishingAndRunning" },
           },
         },
-        finishing: {
-          on: { done: { target: "ready" } },
+        finishingAndRunning: {
+          on: { end: { target: "finishingAndTransmitting" } },
+        },
+        finishingAndTransmitting: {
+          on: { end: { target: "ready" } },
         },
       },
     }),
