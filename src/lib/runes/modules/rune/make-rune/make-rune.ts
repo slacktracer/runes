@@ -1,4 +1,5 @@
 import type { Rune } from "../../../types/Rune.js";
+import { RUNE_LAZY_RADIUS } from "../../../values.js";
 import { makeAnimations } from "./make-animations";
 import { makeDimensions } from "./make-dimensions";
 import { makeOutOfBounds } from "./make-out-of-bounds";
@@ -13,5 +14,5 @@ export const makeRune = ({ dimensions = makeDimensions() } = {}): Rune => ({
   rendering: makeRendering(),
   vertices: [],
   state: makeState().start(),
-  stylus: makeStylus({ initialPoint: { x: 0, y: 0 }, radius: 5 }),
+  stylus: makeStylus({ radius: RUNE_LAZY_RADIUS }),
 });

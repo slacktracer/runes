@@ -1,5 +1,6 @@
 import type { Rune } from "../../../types/Rune.js";
 import type { RuneInput } from "../../../types/RuneInput.js";
+import { RUNE_MINIMAL_VIABLE_LENGTH } from "../../../values.js";
 import { handleMoveInput } from "./handle-move-input.js";
 
 export const carvingStateHandler = ({
@@ -12,7 +13,7 @@ export const carvingStateHandler = ({
   timestamp: number;
 }) => {
   if (runeInput.touchEnd) {
-    if (rune.vertices.length < 15) {
+    if (rune.vertices.length < RUNE_MINIMAL_VIABLE_LENGTH) {
       rune.state.send({ type: "wasNotViable" });
 
       return;

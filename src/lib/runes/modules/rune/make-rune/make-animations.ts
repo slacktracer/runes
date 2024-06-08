@@ -1,13 +1,29 @@
 import type { Rune } from "../../../types/Rune";
+import {
+  RUNE_ANIMATIONS_GROWING_DURATION,
+  RUNE_ANIMATIONS_GROWING_FROM_OPACITY,
+  RUNE_ANIMATIONS_GROWING_RADIUS,
+  RUNE_ANIMATIONS_GROWING_TO_OPACITY,
+  RUNE_ANIMATIONS_GROWING_TO_RADIUS_MULTIPLIER,
+  RUNE_ANIMATIONS_WITHERING_DURATION,
+  RUNE_ANIMATIONS_WITHERING_FROM_SATURATION,
+  RUNE_ANIMATIONS_WITHERING_FROM_THICKNESS,
+  RUNE_ANIMATIONS_WITHERING_TO_SATURATION,
+  RUNE_ANIMATIONS_WITHERING_TO_THICKNESS,
+} from "../../../values.js";
 
 export const makeAnimations = () =>
   ({
     growing: {
-      duration: 250,
-      from: { opacity: 0.7, radius: 15 },
+      duration: RUNE_ANIMATIONS_GROWING_DURATION,
+      from: {
+        opacity: RUNE_ANIMATIONS_GROWING_FROM_OPACITY,
+        radius: RUNE_ANIMATIONS_GROWING_RADIUS,
+      },
       to: {
-        opacity: 0,
-        radius: ({ rune }: { rune: Rune }) => rune.vertices.length * 3,
+        opacity: RUNE_ANIMATIONS_GROWING_TO_OPACITY,
+        radius: ({ rune }: { rune: Rune }) =>
+          rune.vertices.length * RUNE_ANIMATIONS_GROWING_TO_RADIUS_MULTIPLIER,
       },
       tween: false,
     },
@@ -16,9 +32,15 @@ export const makeAnimations = () =>
       isRunning: false,
     },
     withering: {
-      duration: 250,
-      from: { saturation: 100, thickness: 15 },
-      to: { saturation: 0, thickness: 0 },
+      duration: RUNE_ANIMATIONS_WITHERING_DURATION,
+      from: {
+        saturation: RUNE_ANIMATIONS_WITHERING_FROM_SATURATION,
+        thickness: RUNE_ANIMATIONS_WITHERING_FROM_THICKNESS,
+      },
+      to: {
+        saturation: RUNE_ANIMATIONS_WITHERING_TO_SATURATION,
+        thickness: RUNE_ANIMATIONS_WITHERING_TO_THICKNESS,
+      },
       tween: false,
     },
   }) as const;

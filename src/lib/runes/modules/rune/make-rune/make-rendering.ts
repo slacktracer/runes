@@ -1,10 +1,32 @@
 import { HSLA } from "../../../HSLA";
+import {
+  RUNE_COLOUR_ALPHA,
+  RUNE_COLOUR_HUE,
+  RUNE_COLOUR_LIGHTNESS,
+  RUNE_COLOUR_SATURATION,
+  RUNE_SHADOW_BLUR,
+  RUNE_SHADOW_COLOUR_ALPHA,
+  RUNE_SHADOW_COLOUR_HUE,
+  RUNE_SHADOW_COLOUR_LIGHTNESS,
+  RUNE_SHADOW_COLOUR_SATURATION,
+  RUNE_THICKNESS,
+} from "../../../values.js";
 
 export const makeRendering = () => ({
-  colour: new HSLA({ h: 46, s: 100, l: 50, a: 0.7 }),
-  radius: 15,
-  shadowColour: new HSLA({ h: 46, s: 100, l: 50, a: 0.4 }),
-  shadowBlur: 10,
-  thickness: 15,
+  colour: new HSLA({
+    h: RUNE_COLOUR_HUE,
+    s: RUNE_COLOUR_SATURATION,
+    l: RUNE_COLOUR_LIGHTNESS,
+    a: RUNE_COLOUR_ALPHA,
+  }),
+  radius: RUNE_THICKNESS,
+  shadowColour: new HSLA({
+    h: RUNE_SHADOW_COLOUR_HUE,
+    s: RUNE_SHADOW_COLOUR_SATURATION,
+    l: RUNE_SHADOW_COLOUR_LIGHTNESS,
+    a: RUNE_SHADOW_COLOUR_ALPHA,
+  }),
+  shadowBlur: RUNE_SHADOW_BLUR,
+  thickness: RUNE_THICKNESS,
   vertices: [],
 });
