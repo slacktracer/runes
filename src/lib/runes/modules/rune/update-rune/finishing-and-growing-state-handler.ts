@@ -3,11 +3,7 @@ import { Easing, Tween } from "@tweenjs/tween.js";
 import type { Rune } from "../../../types/Rune";
 import { resetRune } from "../reset-rune";
 
-export const finishingAndGrowingStateHandler = ({
-  rune,
-}: {
-  rune: Rune;
-}) => {
+export const finishingAndGrowingStateHandler = ({ rune }: { rune: Rune }) => {
   if (rune.animations.growing.tween) {
     rune.animations.growing.tween.update();
 
@@ -17,9 +13,8 @@ export const finishingAndGrowingStateHandler = ({
     return;
   }
 
-  rune.animations.growing.tween = new Tween(
-    rune.animations.growing.from,
-  )
+  // TODO better naming tweens (say, growingTween) and reuse tweens the created once tween
+  rune.animations.growing.tween = new Tween(rune.animations.growing.from)
     .easing(Easing.Quadratic.Out)
     .to(
       {
