@@ -1,4 +1,8 @@
 import type { Rune } from "../../../types/Rune.js";
+import {
+  RUNE_ANIMATIONS_RUNNING_LEAVE_X_VERTICES,
+  RUNE_ANIMATIONS_RUNNING_REMOVE_ONE_VERTEX_EVERY_X_MILLISECONDS,
+} from "../../../values";
 import { launchRune } from "../launch-rune.js";
 
 export const finishingAndRunningStateHandler = ({
@@ -20,18 +24,22 @@ export const finishingAndRunningStateHandler = ({
   rune.animations.running.isRunning = timestamp;
 
   while (
-    rune.rendering.vertices.length > 1 &&
-    rune.animations.running.accumulator > 8
+    rune.rendering.vertices.length > RUNE_ANIMATIONS_RUNNING_LEAVE_X_VERTICES &&
+    rune.animations.running.accumulator >
+      RUNE_ANIMATIONS_RUNNING_REMOVE_ONE_VERTEX_EVERY_X_MILLISECONDS
   ) {
     rune.rendering.vertices = rune.rendering.vertices.slice(
       1,
       rune.rendering.vertices.length,
     );
 
-    rune.animations.running.accumulator -= 8;
+    rune.animations.running.accumulator -=
+      RUNE_ANIMATIONS_RUNNING_REMOVE_ONE_VERTEX_EVERY_X_MILLISECONDS;
   }
 
-  if (rune.rendering.vertices.length <= 1) {
+  if (
+    rune.rendering.vertices.length <= RUNE_ANIMATIONS_RUNNING_LEAVE_X_VERTICES
+  ) {
     rune.state.send({ type: "end" });
 
     launchRune({
