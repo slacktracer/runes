@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { connectToWebSocketServer } from "../../connect-to-web-socket-server.js";
   import { gameState } from "../../game-state.js";
   import { mainEventBus } from "../../main-event-bus.js";
   import { renderRune } from "../../modules/rune/render-rune.js";
@@ -10,8 +9,6 @@
 
   export let height: number;
   export let width: number;
-
-  connectToWebSocketServer();
 
   let canvas: HTMLCanvasElement;
 

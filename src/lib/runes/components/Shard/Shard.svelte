@@ -1,7 +1,11 @@
 <script lang="ts">
+  import { connectToWebSocketServer } from "../../../runes/connect-to-web-socket-server";
+
   let rotated = false;
 
   let turn = () => (rotated = !rotated);
+
+  connectToWebSocketServer();
 </script>
 
 <div class="shard-container">
