@@ -5,6 +5,7 @@ import { makeRune } from "../../modules/rune/make-rune/make-rune.js";
 import { startTicking } from "../../start-ticking.js";
 
 if (browser) {
+  gameState.oRune = makeRune();
   gameState.rune = makeRune();
 
   /*const stopTicking = */ startTicking();

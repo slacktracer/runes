@@ -1,17 +1,10 @@
 import type { Rune } from "../../../types/Rune.js";
-import type { RuneInput } from "../../../types/RuneInput";
 
-export const handleStartInput = ({
-  rune,
-  runeInput,
-}: {
-  rune: Rune;
-  runeInput: RuneInput;
-}) => {
+export const handleStartInput = ({ rune }: { rune: Rune }) => {
   rune.stylus.update(
     {
-      x: runeInput.touchPosition.x - rune.dimensions.left,
-      y: runeInput.touchPosition.y - rune.dimensions.top,
+      x: rune.input.touchPosition.x - rune.dimensions.left,
+      y: rune.input.touchPosition.y - rune.dimensions.top,
     },
     { both: true },
   );

@@ -1,6 +1,5 @@
 import type { Rune } from "../../../types/Rune.js";
-import { resetRuneInput } from "../reset-rune-input.js";
-import { runeInput } from "../rune-input.js";
+import { resetInput } from "./reset-input";
 import { updateHandlers } from "./update-handlers.js";
 
 export const updateRune = ({
@@ -13,7 +12,7 @@ export const updateRune = ({
   const runeState = rune.state.getSnapshot()
     .value as keyof typeof updateHandlers;
 
-  updateHandlers[runeState]({ rune, runeInput, timestamp });
+  updateHandlers[runeState]({ rune, timestamp });
 
-  resetRuneInput({ runeInput });
+  resetInput({ rune });
 };

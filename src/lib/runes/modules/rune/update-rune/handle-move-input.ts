@@ -1,22 +1,19 @@
 import type { Rune } from "../../../types/Rune.js";
-import type { RuneInput } from "../../../types/RuneInput.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 
 export const handleMoveInput = ({
   rune,
-  runeInput,
   timestamp,
 }: {
   rune: Rune;
-  runeInput: RuneInput;
   timestamp: number;
 }) => {
   const outOfBounds = isOutOfBounds({
     height: rune.dimensions.height,
     thickness: rune.rendering.thickness,
     width: rune.dimensions.width,
-    x: runeInput.touchPosition.x - rune.dimensions.left,
-    y: runeInput.touchPosition.y - rune.dimensions.top,
+    x: rune.input.touchPosition.x - rune.dimensions.left,
+    y: rune.input.touchPosition.y - rune.dimensions.top,
   });
 
   if (outOfBounds) {
@@ -29,8 +26,8 @@ export const handleMoveInput = ({
 
   rune.stylus.update(
     {
-      x: runeInput.touchPosition.x - rune.dimensions.left,
-      y: runeInput.touchPosition.y - rune.dimensions.top,
+      x: rune.input.touchPosition.x - rune.dimensions.left,
+      y: rune.input.touchPosition.y - rune.dimensions.top,
     },
     { friction: 0.01 },
   );

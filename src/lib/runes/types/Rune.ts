@@ -32,6 +32,12 @@ export type Rune = {
     };
   };
   dimensions: { left: number; height: number; top: number; width: number };
+  input: {
+    touchEnd: boolean;
+    touchMove: boolean;
+    touchPosition: { x: number; y: number };
+    touchStart: boolean;
+  };
   outOfBounds: {
     isOutOfBounds: boolean;
     maxTimeOutOfBounds: number;

@@ -21,12 +21,7 @@
     canvasWidth = width || 200;
 
     if (renderingContext && mainEventBus) {
-      const { rune } = gameState;
-
-      const { left, top } = canvas.getBoundingClientRect();
-
-      rune.dimensions.left = left;
-      rune.dimensions.top = top;
+      const { oRune: rune } = gameState;
 
       canvas.addEventListener("touchend", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;

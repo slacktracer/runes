@@ -24,7 +24,9 @@
     <div class="side top"></div>
     <div class="side bottom"></div>
     <div class="side right"></div>
-    <div class="side back"></div>
+    <div class="side back">
+      <slot name="o-side" />
+    </div>
   </div>
 </div>
 
@@ -91,7 +93,8 @@
   }
 
   .back {
-    transform: rotateY(180deg) translateZ(calc(var(--half-shard-thickness)));
+    transform: rotateY(180deg) rotateZ(180deg)
+      translateZ(calc(var(--half-shard-thickness)));
   }
 
   .left {
