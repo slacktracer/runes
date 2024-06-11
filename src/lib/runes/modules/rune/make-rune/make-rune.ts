@@ -8,13 +8,16 @@ import { makeRendering } from "./make-rendering";
 import { makeState } from "./make-state.js";
 import { makeStylus } from "./make-stylus.js";
 
-export const makeRune = ({ dimensions = makeDimensions() } = {}): Rune => ({
+export const makeRune = ({
+  dimensions = makeDimensions(),
+  vertices = [],
+} = {}): Rune => ({
   animations: makeAnimations(),
   dimensions,
   input: makeInput(),
   outOfBounds: makeOutOfBounds(),
-  rendering: makeRendering(),
-  vertices: [],
+  rendering: makeRendering({ vertices }),
+  vertices,
   state: makeState().start(),
   stylus: makeStylus({ radius: RUNE_LAZY_RADIUS }),
 });

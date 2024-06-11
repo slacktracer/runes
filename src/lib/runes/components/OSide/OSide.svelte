@@ -26,14 +26,14 @@
       canvas.addEventListener("touchend", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-        rune.input.touchEnd = true;
+        // rune.input.touchEnd = true;
         rune.input.touchPosition = { x, y };
       });
 
       canvas.addEventListener("touchmove", (event: TouchEvent) => {
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-        rune.input.touchMove = true;
+        // rune.input.touchMove = true;
         rune.input.touchPosition = { x, y };
       });
 
@@ -45,7 +45,7 @@
 
         const [{ clientX: x, clientY: y }] = event.changedTouches;
 
-        rune.input.touchStart = true;
+        // rune.input.touchStart = true;
         rune.input.touchPosition = { x, y };
       });
 
@@ -56,6 +56,12 @@
           renderingContext.clearRect(0, 0, canvas.width, canvas.height);
 
           renderRune({ renderingContext, rune });
+
+          for (const rune of gameState.theirRunes) {
+            updateRune({ rune, timestamp });
+
+            renderRune({ renderingContext, rune });
+          }
         });
       }
     }

@@ -9,7 +9,7 @@ export const webSocketServerOnMessageHandlers = {
   }: WebSocketServerOnMessageHandlerParameter) => {
     webSocketServer.clients.forEach((socket: WebSocketPlusSocketID) => {
       webSocket.socketID !== socket.socketID &&
-        socket.send(JSON.stringify({ data, type: "rune" }));
+        socket.send(JSON.stringify(data));
     });
   },
 };

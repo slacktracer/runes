@@ -1,10 +1,12 @@
+import type { makeEventBus } from "./make-event-bus";
+
 let openingWebSocket = false;
 let webSocket: WebSocket | null = null;
 let webSocketEstablished = false;
 
-import { local } from "./local.js";
-
-export const connectToWebSocketServer = () => {
+export const connectToWebSocketServer = ({
+  eventBus,
+}: { eventBus?: ReturnType<typeof makeEventBus> } = {}) => {
   if (typeof window === "undefined") {
     return;
   }
@@ -39,7 +41,7 @@ export const connectToWebSocketServer = () => {
     const parsedData = JSON.parse(event?.data);
 
     if (parsedData.type === "rune") {
-      // local.update((state) => {});
+      eventBus?.emit("incoming-rune", parsedData);
     }
   });
 

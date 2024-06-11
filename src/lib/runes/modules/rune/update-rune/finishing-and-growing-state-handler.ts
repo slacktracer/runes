@@ -13,7 +13,7 @@ export const finishingAndGrowingStateHandler = ({ rune }: { rune: Rune }) => {
     return;
   }
 
-  // TODO better naming tweens (say, growingTween) and reuse tweens the created once tween
+  // TODO better naming the tweens (say, growingTween) and then reuse the tweens
   rune.animations.growing.tween = new Tween(rune.animations.growing.from)
     .easing(Easing.Quadratic.Out)
     .to(
