@@ -1,7 +1,7 @@
 <script lang="ts">
   import { gameState } from "../../play.js";
-  import OPortal from "../OPortal/OPortal.svelte";
-  import OSide from "../OSide/OSide.svelte";
+  import OPortal from "../ASide/ASide.svelte";
+  import OSide from "../BSide/BSide.svelte";
   import Shard from "../Shard/Shard.svelte";
 </script>
 
