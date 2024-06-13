@@ -1,7 +1,4 @@
-const baseValues = {
-  runeRenderingColourSaturation: 100,
-  runeRenderingThickness: 15,
-};
+import { baseValues } from "./base-values";
 
 export const RUNE_ANIMATIONS_GROWING_DURATION = 250;
 export const RUNE_ANIMATIONS_GROWING_FROM_OPACITY = 0.7;
