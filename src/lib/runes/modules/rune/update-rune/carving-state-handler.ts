@@ -1,5 +1,5 @@
+import { RUNE_MINIMAL_VIABLE_LENGTH } from "../../../config/values.js";
 import type { Rune } from "../../../types/Rune.js";
-import { RUNE_MINIMAL_VIABLE_LENGTH } from "../../../values.js";
 import { handleMoveInput } from "./handle-move-input.js";
 
 export const carvingStateHandler = ({

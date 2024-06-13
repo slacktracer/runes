@@ -3,7 +3,7 @@ import {
   RUNE_DIMENSIONS_LEFT,
   RUNE_DIMENSIONS_TOP,
   RUNE_DIMENSIONS_WIDTH,
-} from "../../../values.js";
+} from "../../../config/values.js";
 
 export const makeDimensions = () => ({
   left: RUNE_DIMENSIONS_LEFT,

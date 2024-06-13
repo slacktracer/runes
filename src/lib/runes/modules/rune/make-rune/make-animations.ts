@@ -1,4 +1,3 @@
-import type { Rune } from "../../../types/Rune";
 import {
   RUNE_ANIMATIONS_GROWING_DURATION,
   RUNE_ANIMATIONS_GROWING_FROM_OPACITY,
@@ -10,7 +9,8 @@ import {
   RUNE_ANIMATIONS_WITHERING_FROM_THICKNESS,
   RUNE_ANIMATIONS_WITHERING_TO_SATURATION,
   RUNE_ANIMATIONS_WITHERING_TO_THICKNESS,
-} from "../../../values.js";
+} from "../../../config/values.js";
+import type { Rune } from "../../../types/Rune";
 
 export const makeAnimations = () =>
   ({

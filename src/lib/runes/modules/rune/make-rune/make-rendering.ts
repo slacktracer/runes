@@ -1,4 +1,3 @@
-import { HSLA } from "../../../HSLA";
 import {
   RUNE_RENDERING_COLOUR_ALPHA,
   RUNE_RENDERING_COLOUR_HUE,
@@ -10,7 +9,8 @@ import {
   RUNE_RENDERING_SHADOW_COLOUR_LIGHTNESS,
   RUNE_RENDERING_SHADOW_COLOUR_SATURATION,
   RUNE_RENDERING_THICKNESS,
-} from "../../../values.js";
+} from "../../../config/values.js";
+import { HSLA } from "../../../HSLA";
 
 export const makeRendering = ({ vertices = [] } = {}) => ({
   colour: new HSLA({
