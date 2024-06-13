@@ -1,5 +1,6 @@
 import { browser } from "$app/environment";
 
+import { STOP_TICKING_IN_X_MILLISECONDS } from "../../config/values";
 import { connectToWebSocketServer } from "../../connect-to-web-socket-server";
 import { gameState } from "../../game-state.js";
 import { mainEventBus } from "../../main-event-bus";
@@ -27,8 +28,8 @@ if (browser && mainEventBus) {
     }
   });
 
-  /*const stopTicking = */ startTicking();
+  const stopTicking = startTicking();
 
-  // /*import.meta.env.TIMEOUT && */ setTimeout(stopTicking, 10000);
-  // import.meta.env.TIMEOUT && setTimeout(stopTicking, import.meta.env.TIMEOUT);
+  STOP_TICKING_IN_X_MILLISECONDS &&
+    setTimeout(stopTicking, STOP_TICKING_IN_X_MILLISECONDS);
 }
