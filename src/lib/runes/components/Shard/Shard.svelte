@@ -14,6 +14,8 @@
     tabindex="0"
   >
     <div class="side front">
+      <div style="font-size: 25rem; opacity: 0.1; text-align: right">1</div>
+
       <slot name="o-portal" />
     </div>
     <div class="side left"></div>
@@ -21,6 +23,8 @@
     <div class="side bottom"></div>
     <div class="side right"></div>
     <div class="side back">
+      <div style="font-size: 25rem; opacity: 0.1; text-align: right">0</div>
+
       <slot name="o-side" />
     </div>
   </div>
