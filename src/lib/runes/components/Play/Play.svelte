@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "./play.js";
+  import "../../play.js";
 
   import OPortal from "../OPortal/OPortal.svelte";
   import OSide from "../OSide/OSide.svelte";

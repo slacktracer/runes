@@ -1,12 +1,12 @@
 import { browser } from "$app/environment";
 
-import { STOP_TICKING_IN_X_MILLISECONDS } from "../../config/values";
-import { connectToWebSocketServer } from "../../connect-to-web-socket-server";
-import { gameState } from "../../game-state.js";
-import { mainEventBus } from "../../main-event-bus";
-import { makeIncomingRune } from "../../modules/rune/make-incoming-rune/make-incoming-rune";
-import { makeRune } from "../../modules/rune/make-rune/make-rune.js";
-import { startTicking } from "../../start-ticking.js";
+import { STOP_TICKING_IN_X_MILLISECONDS } from "./config/values";
+import { connectToWebSocketServer } from "./connect-to-web-socket-server";
+import { gameState } from "./game-state.js";
+import { mainEventBus } from "./main-event-bus";
+import { makeIncomingRune } from "./modules/rune/make-incoming-rune/make-incoming-rune";
+import { makeRune } from "./modules/rune/make-rune/make-rune.js";
+import { startTicking } from "./start-ticking.js";
 
 if (browser && mainEventBus) {
   connectToWebSocketServer({ eventBus: mainEventBus });
