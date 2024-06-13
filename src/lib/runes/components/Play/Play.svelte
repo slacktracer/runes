@@ -1,13 +1,20 @@
 <script lang="ts">
-  import "../../play.js";
-
+  import { gameState } from "../../play.js";
   import OPortal from "../OPortal/OPortal.svelte";
   import OSide from "../OSide/OSide.svelte";
   import Shard from "../Shard/Shard.svelte";
 </script>
 
 <Shard>
-  <OPortal height={500} slot="o-portal" width={320}></OPortal>
+  <OPortal
+    height={gameState.canvasHeight}
+    slot="o-portal"
+    width={gameState.canvasWidth}
+  ></OPortal>
 
-  <OSide height={500} slot="o-side" width={320}></OSide>
+  <OSide
+    height={gameState.canvasHeight}
+    slot="o-side"
+    width={gameState.canvasWidth}
+  ></OSide>
 </Shard>

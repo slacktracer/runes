@@ -1,3 +1,5 @@
+export { gameState } from "./game-state.js";
+
 import { browser } from "$app/environment";
 
 import { STOP_TICKING_IN_X_MILLISECONDS } from "./config/values";
@@ -6,6 +8,8 @@ import { gameState } from "./game-state.js";
 import { mainEventBus } from "./main-event-bus";
 import { makeIncomingRune } from "./modules/rune/make-incoming-rune/make-incoming-rune";
 import { makeRune } from "./modules/rune/make-rune/make-rune.js";
+import { renderRune } from "./modules/rune/render-rune";
+import { updateRune } from "./modules/rune/update-rune/update-rune";
 import { startTicking } from "./start-ticking.js";
 
 if (browser && mainEventBus) {
@@ -14,7 +18,31 @@ if (browser && mainEventBus) {
   gameState.oRune = makeRune();
   gameState.rune = makeRune();
 
-  mainEventBus.on?.("incoming-rune", (event: CustomEvent) => {
+  const stopTicking = startTicking({ eventBus: mainEventBus });
+
+  if (STOP_TICKING_IN_X_MILLISECONDS) {
+    setTimeout(stopTicking, STOP_TICKING_IN_X_MILLISECONDS);
+  }
+
+  mainEventBus.on("tick", ({ detail: timestamp }: CustomEvent) => {
+    updateRune({ rune: gameState.rune, timestamp });
+
+    if (gameState.renderingContext) {
+      gameState.renderingContext.clearRect(
+        0,
+        0,
+        gameState.canvasWidth,
+        gameState.canvasHeight,
+      );
+
+      renderRune({
+        renderingContext: gameState.renderingContext,
+        rune: gameState.rune,
+      });
+    }
+  });
+
+  mainEventBus.on("incoming-rune", (event: CustomEvent) => {
     const { vertices } = event.detail.data;
 
     if (vertices.length) {
@@ -27,9 +55,4 @@ if (browser && mainEventBus) {
       gameState.theirRunes.push(incomingRune);
     }
   });
-
-  const stopTicking = startTicking();
-
-  STOP_TICKING_IN_X_MILLISECONDS &&
-    setTimeout(stopTicking, STOP_TICKING_IN_X_MILLISECONDS);
 }

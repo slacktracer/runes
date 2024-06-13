@@ -2,9 +2,6 @@
   import { onMount } from "svelte";
 
   import { gameState } from "../../game-state.js";
-  import { mainEventBus } from "../../main-event-bus.js";
-  import { renderRune } from "../../modules/rune/render-rune.js";
-  import { updateRune } from "../../modules/rune/update-rune/update-rune.js";
 
   export let height: number;
   export let width: number;
@@ -17,10 +14,12 @@
   onMount(() => {
     const renderingContext = canvas.getContext("2d");
 
-    canvasHeight = height || 200;
-    canvasWidth = width || 200;
+    canvasHeight = height;
+    canvasWidth = width;
 
-    if (renderingContext && mainEventBus) {
+    if (renderingContext) {
+      gameState.renderingContext = renderingContext;
+
       const { rune } = gameState;
 
       const { left, top } = canvas.getBoundingClientRect();
@@ -53,16 +52,6 @@
         rune.input.touchStart = true;
         rune.input.touchPosition = { x, y };
       });
-
-      if (mainEventBus) {
-        mainEventBus.on("tick", ({ detail: timestamp }: CustomEvent) => {
-          updateRune({ rune, timestamp });
-
-          renderingContext.clearRect(0, 0, canvas.width, canvas.height);
-
-          renderRune({ renderingContext, rune });
-        });
-      }
     }
   });
 </script>

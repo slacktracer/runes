@@ -1,4 +1,4 @@
-import { mainEventBus } from "./main-event-bus.js";
+import type { EventBus } from "./types/EventBus";
 
 const iterationInterval = 16;
 
@@ -6,30 +6,26 @@ let accumulator = 0;
 let previousTimestamp: number;
 let requestAnimationFrameID = 0;
 
-const tick = (timestamp: number) => {
-  if (!mainEventBus) {
-    return;
-  }
+export const startTicking = ({ eventBus }: { eventBus: EventBus }) => {
+  const tick = (timestamp: number) => {
+    const timeSinceLastFrame = Math.min(
+      previousTimestamp ? timestamp - previousTimestamp : iterationInterval,
+      34,
+    );
 
-  const timeSinceLastFrame = Math.min(
-    previousTimestamp ? timestamp - previousTimestamp : iterationInterval,
-    34,
-  );
+    previousTimestamp = timestamp;
 
-  previousTimestamp = timestamp;
+    accumulator += timeSinceLastFrame;
 
-  accumulator += timeSinceLastFrame;
+    while (accumulator >= iterationInterval) {
+      eventBus.emit("tick", timestamp);
 
-  while (accumulator >= iterationInterval) {
-    mainEventBus.emit("tick", timestamp);
+      accumulator -= iterationInterval;
+    }
 
-    accumulator -= iterationInterval;
-  }
+    requestAnimationFrameID = requestAnimationFrame(tick);
+  };
 
-  requestAnimationFrameID = requestAnimationFrame(tick);
-};
-
-export const startTicking = () => {
   requestAnimationFrameID = requestAnimationFrame(tick);
 
   return () => cancelAnimationFrame(requestAnimationFrameID);
