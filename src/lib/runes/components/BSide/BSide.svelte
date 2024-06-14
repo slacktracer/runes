@@ -5,6 +5,7 @@
   import { mainEventBus } from "../../main-event-bus.js";
   import { renderRune } from "../../modules/rune/render-rune.js";
   import { updateRune } from "../../modules/rune/update-rune/update-rune.js";
+  import SideID from "../SideID.svelte";
 
   export let height: number;
   export let width: number;
@@ -67,6 +68,8 @@
     }
   });
 </script>
+
+<SideID>0</SideID>
 
 <canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
 

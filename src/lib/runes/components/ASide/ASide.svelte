@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
 
   import { gameState } from "../../game-state.js";
+  import SideID from "../SideID.svelte";
 
   export let height: number;
   export let width: number;
@@ -55,6 +56,8 @@
     }
   });
 </script>
+
+<SideID>1</SideID>
 
 <canvas bind:this={canvas} height={canvasHeight} width={canvasWidth}></canvas>
 
