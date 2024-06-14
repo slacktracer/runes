@@ -3,7 +3,7 @@ import { updateHandlers } from "./update-handlers.js";
 
 export const updateIncomingRune = ({
   incomingRune,
-  // timestamp,
+  timestamp,
 }: {
   incomingRune: IncomingRune;
   timestamp: number;
@@ -11,5 +11,5 @@ export const updateIncomingRune = ({
   const incomingRuneState = incomingRune.state.getSnapshot()
     .value as keyof typeof updateHandlers;
 
-  updateHandlers[incomingRuneState](/*{ incomingRune, timestamp }*/);
+  updateHandlers[incomingRuneState]({ incomingRune, timestamp });
 };

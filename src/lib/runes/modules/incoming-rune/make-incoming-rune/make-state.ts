@@ -10,7 +10,13 @@ export const makeState = () =>
           on: { land: { target: "landing" } },
         },
         landing: {
-          on: { done: { target: "ready" } },
+          on: { done: { target: "running" } },
+        },
+        running: {
+          on: { done: { target: "done" } },
+        },
+        done: {
+          on: { reset: { target: "ready" } },
         },
       },
     }),

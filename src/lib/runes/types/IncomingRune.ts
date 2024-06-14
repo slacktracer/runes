@@ -1,6 +1,43 @@
-import type { Rune } from "./Rune";
+import type { StateValue, StateValueMap } from "xstate";
 
-export type IncomingRune = Omit<
-  Rune,
-  "animations" | "dimensions" | "input" | "outOfBounds" | "stylus"
->;
+import type { HSLA } from "../HSLA.js";
+import type { Point } from "./Point.js";
+
+export type IncomingRune = {
+  animations: {
+    landing: {
+      duration: number;
+      from: {
+        opacity: number;
+        radius: ({ incomingRune }: { incomingRune: IncomingRune }) => number;
+      };
+      to: {
+        opacity: number;
+        radius: number;
+      };
+      tween:
+        | false
+        | {
+            update: () => void;
+          };
+    };
+    running: {
+      accumulator: number;
+      isRunning: false | number;
+    };
+  };
+  done: number;
+  rendering: {
+    colour: HSLA;
+    radius: number;
+    shadowBlur: number;
+    shadowColour: HSLA;
+    thickness: number;
+    vertices: Point[];
+  };
+  vertices: Point[];
+  state: {
+    getSnapshot: () => { value: StateValue | StateValueMap };
+    send: (parameters: { type: string }) => void;
+  };
+};

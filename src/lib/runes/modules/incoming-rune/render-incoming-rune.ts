@@ -8,6 +8,12 @@ export const renderIncomingRune = ({
   incomingRune: IncomingRune;
   renderingContext: CanvasRenderingContext2D;
 }) => {
+  const incomingRuneState = incomingRune.state.getSnapshot().value;
+
+  if (incomingRuneState === "ready") {
+    return;
+  }
+
   renderingContext.lineCap = "round";
 
   renderingContext.lineWidth = incomingRune.rendering.thickness;
@@ -18,18 +24,18 @@ export const renderIncomingRune = ({
 
   renderingContext.strokeStyle = incomingRune.rendering.colour.value;
 
-  let [pointA, pointB] = incomingRune.rendering.vertices;
-
   renderingContext.beginPath();
 
-  if (incomingRune.state.getSnapshot().value === "finishingAndGrowing") {
-    if (!pointA) {
+  if (incomingRuneState === "landing") {
+    const pointZ = incomingRune.rendering.vertices.at(-1);
+
+    if (!pointZ) {
       return;
     }
 
     renderingContext.arc(
-      pointA.x,
-      pointA.y,
+      pointZ.x,
+      pointZ.y,
       incomingRune.rendering.radius,
       0,
       2 * Math.PI,
@@ -39,6 +45,8 @@ export const renderIncomingRune = ({
 
     renderingContext.fill();
   } else {
+    let [pointA, pointB] = incomingRune.rendering.vertices;
+
     if (!(pointA && pointB)) {
       return;
     }
