@@ -6,7 +6,8 @@ type GameState = {
   canvasHeight: number;
   canvasWidth: number;
   oRune: Rune;
-  renderingContext: CanvasRenderingContext2D | undefined;
+  renderingContextA: CanvasRenderingContext2D | undefined;
+  renderingContextB: CanvasRenderingContext2D | undefined;
   rune: Rune;
   theirRunes: IncomingRune[];
 };
@@ -15,7 +16,8 @@ export const gameState: GameState = {
   canvasHeight: 500,
   canvasWidth: 320,
   oRune: makeRune(),
-  renderingContext: undefined,
+  renderingContextA: undefined,
+  renderingContextB: undefined,
   rune: makeRune(),
   theirRunes: [],
 };

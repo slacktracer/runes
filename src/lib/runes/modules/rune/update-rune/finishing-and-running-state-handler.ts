@@ -42,8 +42,6 @@ export const finishingAndRunningStateHandler = ({
   ) {
     rune.state.send({ type: "end" });
 
-    if (rune.incoming === true) return;
-
     launchRune({
       rune,
     });

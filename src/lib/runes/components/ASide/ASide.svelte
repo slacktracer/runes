@@ -19,7 +19,7 @@
     canvasWidth = width;
 
     if (renderingContext) {
-      gameState.renderingContext = renderingContext;
+      gameState.renderingContextA = renderingContext;
 
       const { rune } = gameState;
 

@@ -1,5 +1,3 @@
-export { gameState } from "./game-state.js";
-
 import { browser } from "$app/environment";
 
 import { STOP_TICKING_IN_X_MILLISECONDS } from "./config/values";
@@ -8,14 +6,17 @@ import { gameState } from "./game-state.js";
 import { mainEventBus } from "./main-event-bus";
 import { makeIncomingRune } from "./modules/rune/make-incoming-rune/make-incoming-rune";
 import { makeRune } from "./modules/rune/make-rune/make-rune.js";
+import { renderIncomingRune } from "./modules/rune/render-incoming-rune";
 import { renderRune } from "./modules/rune/render-rune";
+import { updateIncomingRune } from "./modules/rune/update-incoming-rune/update-incoming-rune";
 import { updateRune } from "./modules/rune/update-rune/update-rune";
 import { startTicking } from "./start-ticking.js";
+
+export { gameState } from "./game-state.js";
 
 if (browser && mainEventBus) {
   connectToWebSocketServer({ eventBus: mainEventBus });
 
-  gameState.oRune = makeRune();
   gameState.rune = makeRune();
 
   const stopTicking = startTicking({ eventBus: mainEventBus });
@@ -27,8 +28,8 @@ if (browser && mainEventBus) {
   mainEventBus.on("tick", ({ detail: timestamp }: CustomEvent) => {
     updateRune({ rune: gameState.rune, timestamp });
 
-    if (gameState.renderingContext) {
-      gameState.renderingContext.clearRect(
+    if (gameState.renderingContextA) {
+      gameState.renderingContextA.clearRect(
         0,
         0,
         gameState.canvasWidth,
@@ -36,9 +37,27 @@ if (browser && mainEventBus) {
       );
 
       renderRune({
-        renderingContext: gameState.renderingContext,
+        renderingContext: gameState.renderingContextA,
         rune: gameState.rune,
       });
+
+      if (gameState.renderingContextB) {
+        gameState.renderingContextB.clearRect(
+          0,
+          0,
+          gameState.canvasWidth,
+          gameState.canvasHeight,
+        );
+
+        for (const incomingRune of gameState.theirRunes) {
+          updateIncomingRune({ incomingRune, timestamp });
+
+          renderIncomingRune({
+            incomingRune,
+            renderingContext: gameState.renderingContextB,
+          });
+        }
+      }
     }
   });
 
@@ -48,9 +67,7 @@ if (browser && mainEventBus) {
     if (vertices.length) {
       const incomingRune = makeIncomingRune({ vertices });
 
-      incomingRune.state.send({ type: "start" });
-      incomingRune.state.send({ type: "move" });
-      incomingRune.state.send({ type: "end" });
+      incomingRune.state.send({ type: "land" });
 
       gameState.theirRunes.push(incomingRune);
     }

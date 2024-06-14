@@ -2,9 +2,6 @@
   import { onMount } from "svelte";
 
   import { gameState } from "../../game-state.js";
-  import { mainEventBus } from "../../main-event-bus.js";
-  import { renderRune } from "../../modules/rune/render-rune.js";
-  import { updateRune } from "../../modules/rune/update-rune/update-rune.js";
   import SideID from "../SideID.svelte";
 
   export let height: number;
@@ -18,53 +15,11 @@
   onMount(() => {
     const renderingContext = canvas.getContext("2d");
 
-    canvasHeight = height || 200;
-    canvasWidth = width || 200;
+    canvasHeight = height;
+    canvasWidth = width;
 
-    if (renderingContext && mainEventBus) {
-      const { oRune: rune } = gameState;
-
-      canvas.addEventListener("touchend", (event: TouchEvent) => {
-        const [{ clientX: x, clientY: y }] = event.changedTouches;
-
-        // rune.input.touchEnd = true;
-        rune.input.touchPosition = { x, y };
-      });
-
-      canvas.addEventListener("touchmove", (event: TouchEvent) => {
-        const [{ clientX: x, clientY: y }] = event.changedTouches;
-
-        // rune.input.touchMove = true;
-        rune.input.touchPosition = { x, y };
-      });
-
-      canvas.addEventListener("touchstart", (event: TouchEvent) => {
-        const { left, top } = canvas.getBoundingClientRect();
-
-        rune.dimensions.left = left;
-        rune.dimensions.top = top;
-
-        const [{ clientX: x, clientY: y }] = event.changedTouches;
-
-        // rune.input.touchStart = true;
-        rune.input.touchPosition = { x, y };
-      });
-
-      if (mainEventBus) {
-        mainEventBus.on("tick", ({ detail: timestamp }: CustomEvent) => {
-          updateRune({ rune, timestamp });
-
-          renderingContext.clearRect(0, 0, canvas.width, canvas.height);
-
-          renderRune({ renderingContext, rune });
-
-          for (const rune of gameState.theirRunes) {
-            updateRune({ rune, timestamp });
-
-            renderRune({ renderingContext, rune });
-          }
-        });
-      }
+    if (renderingContext) {
+      gameState.renderingContextB = renderingContext;
     }
   });
 </script>
