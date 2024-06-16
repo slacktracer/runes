@@ -12,7 +12,7 @@ import {
 } from "../../config/values.js";
 import { HSLA } from "../../HSLA";
 
-export const makeRendering = ({ vertices = [] } = {}) => ({
+export const makeRendering = () => ({
   colour: new HSLA({
     h: RUNE_RENDERING_COLOUR_HUE,
     s: RUNE_RENDERING_COLOUR_SATURATION,
@@ -28,5 +28,5 @@ export const makeRendering = ({ vertices = [] } = {}) => ({
   }),
   shadowBlur: RUNE_RENDERING_SHADOW_BLUR,
   thickness: RUNE_RENDERING_THICKNESS,
-  vertices,
+  vertices: [],
 });
