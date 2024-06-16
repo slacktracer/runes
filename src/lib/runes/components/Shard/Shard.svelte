@@ -1,18 +1,13 @@
 <script lang="ts">
+  import Turner from "../Turner.svelte";
+
   let rotated = false;
 
   let turn = () => (rotated = !rotated);
 </script>
 
 <div class="shard-container">
-  <div
-    class:rotated
-    class="shard transitionable"
-    on:click={turn}
-    on:keypress={turn}
-    role="button"
-    tabindex="0"
-  >
+  <div class:rotated class="shard transitionable" role="button" tabindex="0">
     <div class="side front">
       <slot name="o-portal" />
     </div>
@@ -26,23 +21,25 @@
   </div>
 </div>
 
+<Turner on:turn={turn}></Turner>
+
 <style>
   .shard-container {
     display: flex;
     height: 100%;
     justify-content: center;
     outline: none;
-    perspective: 1010px;
+    perspective: 3030px;
     position: relative;
     top: -650px;
   }
 
   .shard {
     --half-shard-thickness: calc(var(--shard-thickness) / 2);
-    --inner-shadow-blur: 50px;
+    --inner-shadow-blur: 40px;
     --inner-shadow-colour: #fff;
     --shard-height: 500px;
-    --shard-thickness: 80px;
+    --shard-thickness: 50px;
     --shard-width: 320px;
 
     display: flex;
@@ -67,7 +64,7 @@
     background-image: url("data:image/svg+xml, %3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 171 171' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.74' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     content: "";
     inset: 0;
-    opacity: 0.4;
+    opacity: 0.3;
     position: absolute;
     z-index: -1;
   }
@@ -118,7 +115,7 @@
   }
 
   .transitionable {
-    transition: transform 500ms;
+    transition: transform 750ms;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 
