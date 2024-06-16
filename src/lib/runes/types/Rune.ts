@@ -6,7 +6,7 @@ import type { Point } from "./Point.js";
 
 export type Rune = {
   animations: {
-    growing: {
+    launching: {
       duration: number;
       from: { opacity: number; radius: number };
       to: { opacity: number; radius: ({ rune }: { rune: Rune }) => number };
