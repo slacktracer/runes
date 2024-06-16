@@ -24,3 +24,7 @@ export const makeEventBus = ({ description }: { description: string }) => {
     once,
   };
 };
+
+// todo
+// Compare with https://cameronnokes.com/blog/build-your-own-event-emitter-using-only-native-dom-apis/
+// sync or async?

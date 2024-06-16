@@ -4,8 +4,8 @@ import {
   INCOMING_RUNE_ANIMATIONS_LANDING_RADIUS,
   INCOMING_RUNE_ANIMATIONS_LANDING_TO_OPACITY,
   INCOMING_RUNE_ANIMATIONS_LANDING_TO_RADIUS_MULTIPLIER,
-} from "../../../config/values.js";
-import type { IncomingRune } from "../../../types/IncomingRune";
+} from "../../config/values.js";
+import type { IncomingRune } from "../../types/IncomingRune";
 
 export const makeAnimations = () =>
   ({

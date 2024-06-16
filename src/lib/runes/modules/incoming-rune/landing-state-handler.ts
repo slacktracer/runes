@@ -1,6 +1,6 @@
 import { Easing, Tween } from "@tweenjs/tween.js";
 
-import type { IncomingRune } from "../../../types/IncomingRune";
+import type { IncomingRune } from "../../types/IncomingRune";
 
 let proxy = { opacity: 0, radius: 0 };
 

@@ -9,8 +9,8 @@ import {
   RUNE_ANIMATIONS_WITHERING_FROM_THICKNESS,
   RUNE_ANIMATIONS_WITHERING_TO_SATURATION,
   RUNE_ANIMATIONS_WITHERING_TO_THICKNESS,
-} from "../../../config/values.js";
-import type { Rune } from "../../../types/Rune";
+} from "../../config/values.js";
+import type { Rune } from "../../types/Rune";
 
 export const makeAnimations = () =>
   ({

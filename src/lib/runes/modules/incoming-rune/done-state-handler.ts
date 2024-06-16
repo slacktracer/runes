@@ -1,4 +1,4 @@
-import type { IncomingRune } from "../../../types/IncomingRune";
+import type { IncomingRune } from "../../types/IncomingRune";
 
 export const doneStateHandler = ({
   incomingRune,

@@ -22,7 +22,7 @@ export const renderRune = ({
 
   renderingContext.beginPath();
 
-  if (rune.state.getSnapshot().value === "finishingAndGrowing") {
+  if (rune.state.getSnapshot().value === "launching") {
     if (!pointA) {
       return;
     }

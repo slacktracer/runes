@@ -1,4 +1,4 @@
-import type { Rune } from "../../../types/Rune.js";
+import type { Rune } from "../../types/Rune.js";
 import { resetInput } from "./reset-input";
 import { updateHandlers } from "./update-handlers.js";
 

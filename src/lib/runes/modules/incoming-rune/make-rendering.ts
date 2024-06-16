@@ -9,8 +9,8 @@ import {
   INCOMING_RUNE_RENDERING_SHADOW_COLOUR_LIGHTNESS,
   INCOMING_RUNE_RENDERING_SHADOW_COLOUR_SATURATION,
   INCOMING_RUNE_RENDERING_THICKNESS,
-} from "../../../config/values.js";
-import { HSLA } from "../../../HSLA";
+} from "../../config/values.js";
+import { HSLA } from "../../HSLA";
 
 export const makeRendering = ({ vertices = [] } = {}) => ({
   colour: new HSLA({

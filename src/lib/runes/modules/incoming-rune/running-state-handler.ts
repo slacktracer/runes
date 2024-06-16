@@ -1,5 +1,5 @@
-import { RUNE_ANIMATIONS_RUNNING_ADD_ONE_VERTEX_EVERY_X_MILLISECONDS } from "../../../config/values";
-import type { IncomingRune } from "../../../types/IncomingRune";
+import { RUNE_ANIMATIONS_RUNNING_ADD_ONE_VERTEX_EVERY_X_MILLISECONDS } from "../../config/values";
+import type { IncomingRune } from "../../types/IncomingRune";
 
 export const runningStateHandler = ({
   incomingRune,

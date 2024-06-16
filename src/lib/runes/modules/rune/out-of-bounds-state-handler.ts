@@ -1,4 +1,4 @@
-import type { Rune } from "../../../types/Rune.js";
+import type { Rune } from "../../types/Rune.js";
 import { handleMoveInput } from "./handle-move-input.js";
 import { handleOutOfBoundsState } from "./handle-out-of-bounds-state.js";
 

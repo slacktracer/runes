@@ -14,24 +14,24 @@ export const makeState = () =>
         },
         carving: {
           on: {
-            end: { target: "finishingAndRunning" },
-            wasNotViable: { target: "finishingAndWithering" },
+            end: { target: "running" },
+            wasNotViable: { target: "withering" },
             wentOutOfBounds: { target: "outOfBounds" },
           },
         },
         outOfBounds: {
           on: {
             backWithinBounds: { target: "carving" },
-            end: { target: "finishingAndRunning" },
+            end: { target: "running" },
           },
         },
-        finishingAndRunning: {
-          on: { end: { target: "finishingAndGrowing" } },
+        running: {
+          on: { end: { target: "launching" } },
         },
-        finishingAndGrowing: {
+        launching: {
           on: { end: { target: "ready" } },
         },
-        finishingAndWithering: { on: { end: { target: "ready" } } },
+        withering: { on: { end: { target: "ready" } } },
       },
     }),
   );

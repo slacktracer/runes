@@ -1,4 +1,4 @@
-import type { IncomingRune } from "../../../types/IncomingRune";
+import type { IncomingRune } from "../../types/IncomingRune";
 import { makeAnimations } from "./make-animations";
 import { makeRendering } from "./make-rendering";
 import { makeState } from "./make-state.js";

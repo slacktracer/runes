@@ -1,9 +1,9 @@
 import { Easing, Tween } from "@tweenjs/tween.js";
 
-import type { Rune } from "../../../types/Rune";
-import { resetRune } from "../reset-rune";
+import type { Rune } from "../../types/Rune";
+import { resetRune } from "./reset-rune";
 
-export const finishingAndGrowingStateHandler = ({ rune }: { rune: Rune }) => {
+export const launchingStateHandler = ({ rune }: { rune: Rune }) => {
   if (rune.animations.growing.tween) {
     rune.animations.growing.tween.update();
 

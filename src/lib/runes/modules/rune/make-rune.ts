@@ -1,5 +1,5 @@
-import { RUNE_LAZY_RADIUS } from "../../../config/values.js";
-import type { Rune } from "../../../types/Rune.js";
+import { RUNE_LAZY_RADIUS } from "../../config/values.js";
+import type { Rune } from "../../types/Rune.js";
 import { makeAnimations } from "./make-animations";
 import { makeDimensions } from "./make-dimensions";
 import { makeInput } from "./make-input";

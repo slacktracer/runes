@@ -1,11 +1,11 @@
 import {
   RUNE_ANIMATIONS_RUNNING_LEAVE_X_VERTICES,
   RUNE_ANIMATIONS_RUNNING_REMOVE_ONE_VERTEX_EVERY_X_MILLISECONDS,
-} from "../../../config/values";
-import type { Rune } from "../../../types/Rune.js";
-import { launchRune } from "../launch-rune.js";
+} from "../../config/values";
+import type { Rune } from "../../types/Rune.js";
+import { launchRune } from "./launch-rune.js";
 
-export const finishingAndRunningStateHandler = ({
+export const runningStateHandler = ({
   rune,
   timestamp,
 }: {
