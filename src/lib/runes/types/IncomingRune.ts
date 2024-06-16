@@ -1,3 +1,4 @@
+import type { Tween } from "@tweenjs/tween.js";
 import type { StateValue, StateValueMap } from "xstate";
 
 import type { HSLA } from "../HSLA.js";
@@ -11,15 +12,15 @@ export type IncomingRune = {
         opacity: number;
         radius: ({ incomingRune }: { incomingRune: IncomingRune }) => number;
       };
+      proxy: {
+        opacity: number;
+        radius: number;
+      };
       to: {
         opacity: number;
         radius: number;
       };
-      tween:
-        | false
-        | {
-            update: () => void;
-          };
+      tween: Tween<{ opacity: number; radius: number }>;
     };
     running: {
       accumulator: number;

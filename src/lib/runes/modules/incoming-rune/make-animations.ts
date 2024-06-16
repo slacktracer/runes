@@ -17,11 +17,12 @@ export const makeAnimations = () =>
           incomingRune.vertices.length *
           INCOMING_RUNE_ANIMATIONS_LANDING_TO_RADIUS_MULTIPLIER,
       },
+      proxy: { opacity: 0, radius: 0 },
       to: {
         opacity: INCOMING_RUNE_ANIMATIONS_LANDING_TO_OPACITY,
         radius: INCOMING_RUNE_ANIMATIONS_LANDING_RADIUS,
       },
-      tween: false,
+      tween: undefined,
     },
     running: {
       accumulator: 0,

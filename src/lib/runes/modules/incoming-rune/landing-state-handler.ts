@@ -2,8 +2,6 @@ import { Easing, Tween } from "@tweenjs/tween.js";
 
 import type { IncomingRune } from "../../types/IncomingRune";
 
-let proxy = { opacity: 0, radius: 0 };
-
 export const landingStateHandler = ({
   incomingRune,
 }: {
@@ -12,18 +10,22 @@ export const landingStateHandler = ({
   if (incomingRune.animations.landing.tween) {
     incomingRune.animations.landing.tween.update();
 
-    incomingRune.rendering.colour.alpha = proxy.opacity;
-    incomingRune.rendering.radius = proxy.radius;
+    incomingRune.rendering.colour.alpha =
+      incomingRune.animations.landing.proxy.opacity;
+    incomingRune.rendering.radius =
+      incomingRune.animations.landing.proxy.radius;
 
     return;
   }
 
-  proxy = {
+  incomingRune.animations.landing.proxy = {
     opacity: incomingRune.animations.landing.from.opacity,
     radius: incomingRune.animations.landing.from.radius({ incomingRune }),
   };
 
-  incomingRune.animations.landing.tween = new Tween(proxy)
+  incomingRune.animations.landing.tween = new Tween(
+    incomingRune.animations.landing.proxy,
+  )
     .easing(Easing.Quadratic.Out)
     .to(
       incomingRune.animations.landing.to,

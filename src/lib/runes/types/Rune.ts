@@ -1,3 +1,4 @@
+import type { Tween } from "@tweenjs/tween.js";
 import type { StateValue, StateValueMap } from "xstate";
 
 import type { HSLA } from "../HSLA.js";
@@ -10,11 +11,7 @@ export type Rune = {
       duration: number;
       from: { opacity: number; radius: number };
       to: { opacity: number; radius: ({ rune }: { rune: Rune }) => number };
-      tween:
-        | false
-        | {
-            update: () => void;
-          };
+      tween?: Tween<{ opacity: number; radius: number }>;
     };
     running: {
       accumulator: number;
@@ -24,11 +21,7 @@ export type Rune = {
       duration: number;
       from: { saturation: number; thickness: number };
       to: { saturation: number; thickness: number };
-      tween:
-        | false
-        | {
-            update: () => void;
-          };
+      tween?: Tween<{ saturation: number; thickness: number }>;
     };
   };
   dimensions: { left: number; height: number; top: number; width: number };

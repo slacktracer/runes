@@ -25,7 +25,7 @@ export const makeAnimations = () =>
         radius: ({ rune }: { rune: Rune }) =>
           rune.vertices.length * RUNE_ANIMATIONS_LAUNCHING_TO_RADIUS_MULTIPLIER,
       },
-      tween: false,
+      tween: undefined,
     },
     running: {
       accumulator: 0,
@@ -41,6 +41,6 @@ export const makeAnimations = () =>
         saturation: RUNE_ANIMATIONS_WITHERING_TO_SATURATION,
         thickness: RUNE_ANIMATIONS_WITHERING_TO_THICKNESS,
       },
-      tween: false,
+      tween: undefined,
     },
   }) as const;
