@@ -47,6 +47,9 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    /* todo */
+    /* this positioning probably belongs in the parent using this component */
+    /* not sure how yet though */
     translate: 0 6rem;
   }
 

@@ -38,6 +38,9 @@
     --half-shard-thickness: calc(var(--shard-thickness) / 2);
     --inner-shadow-blur: 40px;
     --inner-shadow-colour: #fff;
+    /* todo */
+    /* I probably want to set these values in the values file */
+    /* and then set these CSS custom properties inside the script tag */
     --shard-height: 500px;
     --shard-thickness: 50px;
     --shard-width: 320px;
