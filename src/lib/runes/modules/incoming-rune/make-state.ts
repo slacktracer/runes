@@ -13,6 +13,12 @@ export const makeState = () =>
           on: { done: { target: "running" } },
         },
         running: {
+          on: { done: { target: "hitting" } },
+        },
+        hitting: {
+          on: { done: { target: "burning" } },
+        },
+        burning: {
           on: { done: { target: "done" } },
         },
         done: {

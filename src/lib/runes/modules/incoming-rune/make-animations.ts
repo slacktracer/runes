@@ -28,4 +28,30 @@ export const makeAnimations = () =>
       accumulator: 0,
       isRunning: false,
     },
+    hitting: {
+      duration: ({ incomingRune }: { incomingRune: IncomingRune }) =>
+        incomingRune.vertices.length *
+        INCOMING_RUNE_ANIMATIONS_LANDING_TO_RADIUS_MULTIPLIER *
+        10,
+      from: { oscillation: 0 },
+      proxy: { oscillation: 0 },
+      tick: -1,
+      to: { oscillation: 10 },
+      tween: undefined,
+    },
+    burning: {
+      step1: {
+        duration: 150,
+        from: { thickness: 15 },
+        to: { thickness: 40 },
+        tween: undefined,
+      },
+      step2: {
+        duration: 150,
+        from: { alpha: 0.7, saturation: 100, thickness: 40 },
+        to: { alpha: 0.1, saturation: 0, thickness: 3 },
+        tween: undefined,
+      },
+      tweenGroup: undefined,
+    },
   }) as const;

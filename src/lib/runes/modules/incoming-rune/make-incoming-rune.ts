@@ -10,7 +10,7 @@ export const makeIncomingRune = ({ vertices = [] } = {}): IncomingRune => {
     animations: makeAnimations(),
     done: 0,
     rendering: lastVertex
-      ? makeRendering({ vertices: [lastVertex] })
+      ? makeRendering({ vertices: [structuredClone(lastVertex)] })
       : makeRendering(),
     vertices,
     state: makeState().start(),

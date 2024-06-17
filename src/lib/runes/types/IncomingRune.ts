@@ -1,4 +1,4 @@
-import type { Tween } from "@tweenjs/tween.js";
+import type { Group, Tween } from "@tweenjs/tween.js";
 import type { StateValue, StateValueMap } from "xstate";
 
 import type { HSLA } from "../HSLA.js";
@@ -25,6 +25,29 @@ export type IncomingRune = {
     running: {
       accumulator: number;
       isRunning: false | number;
+    };
+    hitting: {
+      duration: ({ incomingRune }: { incomingRune: IncomingRune }) => number;
+      from: { oscillation: number };
+      proxy: { oscillation: number };
+      tick: number;
+      to: { oscillation: number };
+      tween: Tween<{ oscillation: number }>;
+    };
+    burning: {
+      step1: {
+        duration: number;
+        from: { thickness: number };
+        to: { thickness: number };
+        tween: Tween<{ thickness: number }>;
+      };
+      step2: {
+        duration: number;
+        from: { alpha: number; saturation: number; thickness: number };
+        to: { alpha: number; saturation: number; thickness: number };
+        tween: Tween<{ alpha: number; saturation: number; thickness: number }>;
+      };
+      tweenGroup: Group;
     };
   };
   done: number;

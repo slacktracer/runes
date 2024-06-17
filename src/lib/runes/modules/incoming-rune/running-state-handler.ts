@@ -29,7 +29,7 @@ export const runningStateHandler = ({
     );
 
     if (previousPoint) {
-      incomingRune.rendering.vertices.push(previousPoint);
+      incomingRune.rendering.vertices.push(structuredClone(previousPoint));
     }
 
     incomingRune.animations.running.accumulator -=
