@@ -1,11 +1,5 @@
-<main>
-  <h1>Welcome to Runes</h1>
+<script>
+  import TitleScreen from "../lib/runes/components/TitleScreen.svelte";
+</script>
 
-  <h2><a href="/play">play</a></h2>
-</main>
-
-<style>
-  main {
-    margin: 1rem;
-  }
-</style>
+<TitleScreen></TitleScreen>
