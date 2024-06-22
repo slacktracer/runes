@@ -2,6 +2,7 @@ import {
   RUNE_ANIMATIONS_RUNNING_LEAVE_X_VERTICES,
   RUNE_ANIMATIONS_RUNNING_REMOVE_ONE_VERTEX_EVERY_X_MILLISECONDS,
 } from "../../config/values";
+import { mainEventBus } from "../../main-event-bus";
 import type { Rune } from "../../types/Rune.js";
 import { launchRune } from "./launch-rune.js";
 
@@ -12,6 +13,14 @@ export const runningStateHandler = ({
   rune: Rune;
   timestamp: number;
 }) => {
+  if (rune.input.touchEnd) {
+    if (mainEventBus) {
+      mainEventBus.emit("turn");
+
+      return;
+    }
+  }
+
   if (rune.animations.running.isRunning === false) {
     rune.animations.running.isRunning = timestamp;
 

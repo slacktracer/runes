@@ -1,9 +1,18 @@
 import { Easing, Tween } from "@tweenjs/tween.js";
 
+import { mainEventBus } from "../../main-event-bus";
 import type { Rune } from "../../types/Rune";
 import { resetRune } from "./reset-rune";
 
 export const launchingStateHandler = ({ rune }: { rune: Rune }) => {
+  if (rune.input.touchEnd) {
+    if (mainEventBus) {
+      mainEventBus.emit("turn");
+
+      return;
+    }
+  }
+
   if (rune.animations.launching.tween) {
     rune.animations.launching.tween.update();
 

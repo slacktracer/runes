@@ -1,9 +1,15 @@
 <script lang="ts">
+  import { mainEventBus } from "$lib/src/lib/runes/main-event-bus";
+
   import Turner from "../Turner.svelte";
 
   let rotated = false;
 
   let turn = () => (rotated = !rotated);
+
+  if (mainEventBus) {
+    mainEventBus.on("turn", turn);
+  }
 </script>
 
 <div class="shard-container">
