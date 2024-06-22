@@ -1,4 +1,5 @@
 import type { Rune } from "../../types/Rune.js";
+import { normaliseRune } from "../normalise-rune";
 import { handleMoveInput } from "./handle-move-input.js";
 import { handleOutOfBoundsState } from "./handle-out-of-bounds-state.js";
 
@@ -22,6 +23,8 @@ export const outOfBoundsStateHandler = ({
   const timeout = handleOutOfBoundsState({ rune, timestamp });
 
   if (timeout) {
+    normaliseRune({ rune });
+
     rune.state.send({ type: "end" });
   }
 };
