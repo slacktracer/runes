@@ -1,3 +1,5 @@
+import simplify from "simplify-js";
+
 import type { Rune } from "../../types/Rune.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 
@@ -40,9 +42,11 @@ export const handleMoveInput = ({
 
   const { x, y } = rune.stylus.getBrushCoordinates();
 
-  rune.vertices.push({ x, y });
+  const simplified = simplify(rune.vertices.concat([{ x, y }]));
 
-  rune.rendering.vertices.push({ x, y });
+  rune.vertices = simplified;
+
+  rune.rendering.vertices = simplified;
 
   return true;
 };
