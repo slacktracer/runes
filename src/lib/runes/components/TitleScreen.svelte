@@ -15,7 +15,7 @@
 
   h1 {
     clip-path: circle(40dvw);
-    font-size: 40dvw;
+    font-size: 40.5dvw;
     letter-spacing: -2dvw;
     margin: 0;
     text-align: center;
