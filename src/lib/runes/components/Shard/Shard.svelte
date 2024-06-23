@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { local } from "../../local.js";
   import { mainEventBus } from "../../main-event-bus.js";
+  import Misses from "../Misses.svelte";
 
   let rotated = false;
 
@@ -24,6 +26,14 @@
     </div>
   </div>
 </div>
+
+<Misses>
+  {#if $local.misses >= 500}
+    YOU LOSE!
+  {:else}
+    HITS: {$local.misses}
+  {/if}
+</Misses>
 
 <style>
   .shard-container {

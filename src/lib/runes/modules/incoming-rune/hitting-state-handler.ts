@@ -8,6 +8,10 @@ export const hittingStateHandler = ({
 }: {
   incomingRune: IncomingRune;
 }) => {
+  if (incomingRune.vertices.length === 0) {
+    incomingRune.state.send({ type: "defeated" });
+  }
+
   if (incomingRune.animations.hitting.tween) {
     incomingRune.animations.hitting.tween.update();
 

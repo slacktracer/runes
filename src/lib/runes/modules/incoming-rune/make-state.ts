@@ -16,10 +16,10 @@ export const makeState = () =>
           on: { done: { target: "hitting" } },
         },
         hitting: {
-          on: { done: { target: "burning" } },
+          on: { defeated: { target: "done" }, done: { target: "burning" } },
         },
         burning: {
-          on: { done: { target: "done" } },
+          on: { defeated: { target: "done" }, done: { target: "done" } },
         },
         done: {
           on: { reset: { target: "ready" } },

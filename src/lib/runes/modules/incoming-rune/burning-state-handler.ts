@@ -7,6 +7,10 @@ export const burningStateHandler = ({
 }: {
   incomingRune: IncomingRune;
 }) => {
+  if (incomingRune.vertices.length === 0) {
+    incomingRune.state.send({ type: "defeated" });
+  }
+
   if (incomingRune.animations.burning.tweenGroup) {
     incomingRune.animations.burning.tweenGroup.update();
 
@@ -44,6 +48,9 @@ export const burningStateHandler = ({
       incomingRune.rendering.colour.alpha = x.alpha;
       incomingRune.rendering.colour.saturation = x.saturation;
       incomingRune.rendering.thickness = x.thickness;
+    })
+    .onComplete(() => {
+      incomingRune.state.send({ type: "done" });
     });
 
   incomingRune.animations.burning.step1.tween.chain(
