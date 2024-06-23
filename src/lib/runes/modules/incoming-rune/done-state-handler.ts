@@ -8,13 +8,13 @@ export const doneStateHandler = ({
   incomingRune: IncomingRune;
   timestamp: number;
 }) => {
-  local.update((state) => {
-    state.misses += incomingRune.vertices.length;
-
-    return state;
-  });
-
   if (timestamp - incomingRune.done > 2000) {
+    local.update((state) => {
+      state.misses += incomingRune.vertices.length;
+
+      return state;
+    });
+
     incomingRune.state.send({ type: "reset" });
   }
 };
