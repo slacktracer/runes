@@ -14,7 +14,6 @@ export const carvingStateHandler = ({
     return;
   }
 
-  // simulating the idea
   if (counterRune.vertices.length > 5) {
     counterRune.rendering.vertices.shift();
   }

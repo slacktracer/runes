@@ -14,6 +14,11 @@ export const makeState = () =>
         },
         carving: {
           on: {
+            end: { target: "fading" },
+          },
+        },
+        fading: {
+          on: {
             end: { target: "ready" },
           },
         },
