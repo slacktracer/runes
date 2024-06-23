@@ -20,7 +20,7 @@ export type IncomingRune = {
         opacity: number;
         radius: number;
       };
-      tween: Tween<{ opacity: number; radius: number }>;
+      tween?: Tween<{ opacity: number; radius: number }>;
     };
     running: {
       accumulator: number;
@@ -32,22 +32,22 @@ export type IncomingRune = {
       proxy: { oscillation: number };
       tick: number;
       to: { oscillation: number };
-      tween: Tween<{ oscillation: number }>;
+      tween?: Tween<{ oscillation: number }>;
     };
     burning: {
       step1: {
         duration: number;
         from: { thickness: number };
         to: { thickness: number };
-        tween: Tween<{ thickness: number }>;
+        tween?: Tween<{ thickness: number }>;
       };
       step2: {
         duration: number;
         from: { alpha: number; saturation: number; thickness: number };
         to: { alpha: number; saturation: number; thickness: number };
-        tween: Tween<{ alpha: number; saturation: number; thickness: number }>;
+        tween?: Tween<{ alpha: number; saturation: number; thickness: number }>;
       };
-      tweenGroup: Group;
+      tweenGroup?: Group;
     };
   };
   done: number;

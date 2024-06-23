@@ -4,6 +4,8 @@ import { STOP_TICKING_IN_X_MILLISECONDS } from "./config/values";
 import { connectToWebSocketServer } from "./connect-to-web-socket-server";
 import { gameState } from "./game-state.js";
 import { mainEventBus } from "./main-event-bus";
+import { renderCounterRune } from "./modules/counter-rune/render-counter-rune";
+import { updateCounterRune } from "./modules/counter-rune/update-counter-rune";
 import { makeIncomingRune } from "./modules/incoming-rune/make-incoming-rune";
 import { renderIncomingRune } from "./modules/incoming-rune/render-incoming-rune";
 import { updateIncomingRune } from "./modules/incoming-rune/update-incoming-rune";
@@ -57,6 +59,13 @@ if (browser && mainEventBus) {
             renderingContext: gameState.renderingContextB,
           });
         }
+
+        updateCounterRune({ counterRune: gameState.counterRune, timestamp });
+
+        renderCounterRune({
+          counterRune: gameState.counterRune,
+          renderingContext: gameState.renderingContextB,
+        });
       }
     }
   });

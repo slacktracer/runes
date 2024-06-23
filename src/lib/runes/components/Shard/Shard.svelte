@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { mainEventBus } from "$lib/src/lib/runes/main-event-bus";
-
-  import Turner from "../Turner.svelte";
+  import { mainEventBus } from "../../main-event-bus.js";
 
   let rotated = false;
 
@@ -26,8 +24,6 @@
     </div>
   </div>
 </div>
-
-<Turner on:turn={turn}></Turner>
 
 <style>
   .shard-container {

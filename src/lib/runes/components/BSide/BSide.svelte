@@ -20,6 +20,39 @@
 
     if (renderingContext) {
       gameState.renderingContextB = renderingContext;
+
+      const { counterRune } = gameState;
+
+      const { left, top } = canvas.getBoundingClientRect();
+
+      counterRune.dimensions.left = left;
+      counterRune.dimensions.top = top;
+
+      canvas.addEventListener("touchend", (event: TouchEvent) => {
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
+
+        counterRune.input.touchEnd = true;
+        counterRune.input.touchPosition = { x, y };
+      });
+
+      canvas.addEventListener("touchmove", (event: TouchEvent) => {
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
+
+        counterRune.input.touchMove = true;
+        counterRune.input.touchPosition = { x, y };
+      });
+
+      canvas.addEventListener("touchstart", (event: TouchEvent) => {
+        const { left, top } = canvas.getBoundingClientRect();
+
+        counterRune.dimensions.left = left;
+        counterRune.dimensions.top = top;
+
+        const [{ clientX: x, clientY: y }] = event.changedTouches;
+
+        counterRune.input.touchStart = true;
+        counterRune.input.touchPosition = { x, y };
+      });
     }
   });
 </script>
