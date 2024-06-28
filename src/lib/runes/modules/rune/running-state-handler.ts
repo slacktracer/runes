@@ -1,3 +1,5 @@
+import simplify from "simplify-js";
+
 import {
   RUNE_ANIMATIONS_RUNNING_LEAVE_X_VERTICES,
   RUNE_ANIMATIONS_RUNNING_REMOVE_ONE_VERTEX_EVERY_X_MILLISECONDS,
@@ -23,6 +25,12 @@ export const runningStateHandler = ({
 
   if (rune.animations.running.isRunning === false) {
     rune.animations.running.isRunning = timestamp;
+
+    const simplified = simplify(rune.vertices, 0.5);
+
+    rune.vertices = simplified;
+
+    rune.rendering.vertices = simplified;
 
     return;
   }
