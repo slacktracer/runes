@@ -1,3 +1,4 @@
+import { COUNTER_RUNE_MIN_THICKNESS } from "../../config/values";
 import { mainEventBus } from "../../main-event-bus";
 import type { CounterRune } from "../../types/CounterRune";
 import { resetCounterRune } from "./reset-counter-rune";
@@ -16,7 +17,7 @@ export const fadingStateHandler = ({
     }
   }
 
-  if (counterRune.rendering.thickness === 1) {
+  if (counterRune.rendering.thickness === COUNTER_RUNE_MIN_THICKNESS) {
     counterRune.state.send({ type: "end" });
 
     resetCounterRune({ counterRune });
