@@ -1,3 +1,7 @@
+import {
+  COUNTER_RUNE_EFFECT_DISTANCE,
+  COUNTER_RUNE_MAX_LENGTH,
+} from "../../config/values";
 import { gameState } from "../../play";
 import type { CounterRune } from "../../types/CounterRune";
 import { handleMoveInput } from "./handle-move-input.js";
@@ -15,7 +19,7 @@ export const carvingStateHandler = ({
     return;
   }
 
-  if (counterRune.vertices.length > 5) {
+  if (counterRune.vertices.length > COUNTER_RUNE_MAX_LENGTH) {
     counterRune.rendering.vertices.shift();
   }
 
@@ -33,8 +37,9 @@ export const carvingStateHandler = ({
           counterRuneEnd.y - incomingRuneStart.y,
         );
 
-        if (distance < 60) {
+        if (distance < COUNTER_RUNE_EFFECT_DISTANCE) {
           rune.vertices.splice(0, 1);
+
           rune.rendering.vertices.splice(0, 1);
         }
       }
@@ -45,7 +50,7 @@ export const carvingStateHandler = ({
           counterRuneEnd.y - incomingRuneEnd.y,
         );
 
-        if (distance < 60) {
+        if (distance < COUNTER_RUNE_EFFECT_DISTANCE) {
           const runeLength = rune.vertices.length;
 
           rune.vertices.splice(runeLength - 1, 1);
