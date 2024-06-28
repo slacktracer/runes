@@ -54,7 +54,7 @@
     /* I probably want to set these values in the values file */
     /* and then set these CSS custom properties inside the script tag */
     --shard-height: 500px;
-    --shard-thickness: 50px;
+    --shard-thickness: 20px;
     --shard-width: 320px;
 
     display: flex;
@@ -130,8 +130,9 @@
   }
 
   .transitionable {
-    transition: transform 750ms;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: transform 300ms;
+    /*transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);*/
+    transition-timing-function: ease-in;
   }
 
   .rotated {
