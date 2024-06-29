@@ -11,6 +11,7 @@ type GameState = {
   renderingContextA: CanvasRenderingContext2D | undefined;
   renderingContextB: CanvasRenderingContext2D | undefined;
   rune: Rune;
+  stamina: number;
   theirRunes: IncomingRune[];
 };
 
@@ -21,5 +22,6 @@ export const gameState: GameState = {
   renderingContextA: undefined,
   renderingContextB: undefined,
   rune: makeRune(),
+  stamina: 60,
   theirRunes: [],
 };

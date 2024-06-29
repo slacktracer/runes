@@ -3,6 +3,7 @@ import { browser } from "$app/environment";
 import { STOP_TICKING_IN_X_MILLISECONDS } from "./config/values";
 import { connectToWebSocketServer } from "./connect-to-web-socket-server";
 import { gameState } from "./game-state.js";
+import { local } from "./local";
 import { mainEventBus } from "./main-event-bus";
 import { renderCounterRune } from "./modules/counter-rune/render-counter-rune";
 import { updateCounterRune } from "./modules/counter-rune/update-counter-rune";
@@ -79,6 +80,56 @@ if (browser && mainEventBus) {
       incomingRune.state.send({ type: "land" });
 
       gameState.theirRunes.push(incomingRune);
+    }
+  });
+
+  mainEventBus.on("new-vertex", () => {
+    local.update((state) => {
+      if (state.stamina > 0) {
+        state.stamina -= 1;
+      }
+
+      gameState.stamina = state.stamina;
+
+      if (gameState.stamina < 1) {
+        console.log(gameState.stamina);
+        accumulator -= 3000;
+      }
+
+      return state;
+    });
+  });
+
+  let previousTimestamp = 0;
+  let accumulator = 0;
+
+  mainEventBus.on("tick", ({ detail: timestamp }) => {
+    if (gameState.stamina > 99) {
+      return;
+    }
+
+    if (!previousTimestamp) {
+      previousTimestamp = timestamp;
+    }
+
+    accumulator += timestamp - previousTimestamp;
+
+    // console.log(accumulator);
+
+    previousTimestamp = timestamp;
+
+    while (accumulator > 400) {
+      accumulator -= 400;
+
+      local.update((state) => {
+        if (state.stamina < 60) {
+          state.stamina += 1;
+        }
+
+        gameState.stamina = state.stamina;
+
+        return state;
+      });
     }
   });
 }

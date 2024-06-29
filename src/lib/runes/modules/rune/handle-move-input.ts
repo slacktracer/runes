@@ -1,3 +1,5 @@
+import { mainEventBus } from "../../main-event-bus";
+import { gameState } from "../../play";
 import type { Rune } from "../../types/Rune.js";
 import { isOutOfBounds } from "./is-out-of-bounds.js";
 
@@ -40,7 +42,13 @@ export const handleMoveInput = ({
 
   const { x, y } = rune.stylus.getBrushCoordinates();
 
+  if (gameState.stamina < 1) {
+    return;
+  }
+
   const vertex = { x: Math.round(x), y: Math.round(y) };
+
+  mainEventBus && mainEventBus.emit("new-vertex", vertex);
 
   rune.vertices.push(vertex);
 

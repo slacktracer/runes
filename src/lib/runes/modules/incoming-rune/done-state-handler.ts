@@ -10,7 +10,7 @@ export const doneStateHandler = ({
 }) => {
   if (timestamp - incomingRune.done > 2000) {
     local.update((state) => {
-      state.misses += incomingRune.vertices.length;
+      state.misses -= incomingRune.vertices.length;
 
       return state;
     });

@@ -2,9 +2,12 @@ import {
   COUNTER_RUNE_EFFECT_DISTANCE,
   COUNTER_RUNE_MAX_LENGTH,
 } from "../../config/values";
+import { mainEventBus } from "../../main-event-bus";
 import { gameState } from "../../play";
 import type { CounterRune } from "../../types/CounterRune";
 import { handleMoveInput } from "./handle-move-input.js";
+
+let deleteCount = 0;
 
 export const carvingStateHandler = ({
   counterRune,
@@ -41,6 +44,13 @@ export const carvingStateHandler = ({
           rune.vertices.splice(0, 1);
 
           rune.rendering.vertices.splice(0, 1);
+
+          deleteCount += 1;
+
+          if (deleteCount >= 3) {
+            deleteCount = 0;
+            mainEventBus && mainEventBus.emit("new-vertex");
+          }
         }
       }
 

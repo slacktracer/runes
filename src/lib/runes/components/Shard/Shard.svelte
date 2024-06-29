@@ -1,7 +1,8 @@
 <script lang="ts">
   import { local } from "../../local.js";
   import { mainEventBus } from "../../main-event-bus.js";
-  import Misses from "../Misses.svelte";
+  import SBHUD from "../SBHUD.svelte";
+  import SBHUDContainer from "../SBHUDContainer.svelte";
 
   let rotated = false;
 
@@ -27,13 +28,25 @@
   </div>
 </div>
 
-<Misses>
-  {#if $local.misses >= 500}
-    YOU LOSE!
-  {:else}
-    HITS: {$local.misses}
-  {/if}
-</Misses>
+{#if $local.misses < 1}
+  <div>YOU LOSE</div>
+{:else}
+  <SBHUDContainer>
+    <SBHUD>
+      <div slot="a">
+        SHIELD
+        <br />
+        {$local.misses}
+      </div>
+
+      <div slot="b">
+        STAMINA
+        <br />
+        {$local.stamina}
+      </div>
+    </SBHUD>
+  </SBHUDContainer>
+{/if}
 
 <style>
   .shard-container {
