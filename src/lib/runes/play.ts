@@ -118,8 +118,8 @@ if (browser && mainEventBus) {
 
     previousTimestamp = timestamp;
 
-    while (accumulator > 400) {
-      accumulator -= 400;
+    while (accumulator > 200) {
+      accumulator -= 200;
 
       local.update((state) => {
         if (state.stamina < 60) {
