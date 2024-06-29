@@ -1,6 +1,5 @@
 import { RUNE_MINIMAL_VIABLE_LENGTH } from "../../config/values.js";
 import type { Rune } from "../../types/Rune.js";
-import { normaliseRune } from "../normalise-rune";
 import { handleMoveInput } from "./handle-move-input.js";
 
 export const carvingStateHandler = ({
@@ -16,8 +15,6 @@ export const carvingStateHandler = ({
 
       return;
     }
-
-    normaliseRune({ rune });
 
     rune.state.send({ type: "end" });
 

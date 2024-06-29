@@ -26,7 +26,7 @@ export const runningStateHandler = ({
   if (rune.animations.running.isRunning === false) {
     rune.animations.running.isRunning = timestamp;
 
-    const simplified = simplify(rune.vertices, 0.5);
+    const simplified = simplify(rune.vertices, 2);
 
     rune.vertices = simplified;
 
