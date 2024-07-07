@@ -32,7 +32,7 @@ export const makeAnimations = () =>
       duration: ({ incomingRune }: { incomingRune: IncomingRune }) =>
         incomingRune.vertices.length *
         INCOMING_RUNE_ANIMATIONS_LANDING_TO_RADIUS_MULTIPLIER *
-        10,
+        15,
       from: { oscillation: 0 },
       proxy: { oscillation: 0 },
       tick: -1,

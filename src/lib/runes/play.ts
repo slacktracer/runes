@@ -92,8 +92,7 @@ if (browser && mainEventBus) {
       gameState.stamina = state.stamina;
 
       if (gameState.stamina < 1) {
-        console.log(gameState.stamina);
-        accumulator -= 3000;
+        accumulator -= 1500;
       }
 
       return state;
@@ -104,7 +103,7 @@ if (browser && mainEventBus) {
   let accumulator = 0;
 
   mainEventBus.on("tick", ({ detail: timestamp }) => {
-    if (gameState.stamina > 99) {
+    if (gameState.stamina > 60) {
       return;
     }
 

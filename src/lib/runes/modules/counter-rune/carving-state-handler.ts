@@ -47,7 +47,7 @@ export const carvingStateHandler = ({
 
           deleteCount += 1;
 
-          if (deleteCount >= 3) {
+          if (deleteCount >= 2) {
             deleteCount = 0;
             mainEventBus && mainEventBus.emit("new-vertex");
           }

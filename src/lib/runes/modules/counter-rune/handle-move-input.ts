@@ -1,5 +1,3 @@
-import simplify from "simplify-js";
-
 import type { CounterRune } from "../../types/CounterRune";
 
 export const handleMoveInput = ({
