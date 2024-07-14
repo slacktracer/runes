@@ -1,4 +1,6 @@
 import {
+  INCOMING_RUNE_ANIMATIONS_HITTING_DELAY,
+  INCOMING_RUNE_ANIMATIONS_HITTING_DURATION_MULTIPLIER,
   INCOMING_RUNE_ANIMATIONS_LANDING_DURATION,
   INCOMING_RUNE_ANIMATIONS_LANDING_FROM_OPACITY,
   INCOMING_RUNE_ANIMATIONS_LANDING_RADIUS,
@@ -31,8 +33,8 @@ export const makeAnimations = () =>
     hitting: {
       duration: ({ incomingRune }: { incomingRune: IncomingRune }) =>
         incomingRune.vertices.length *
-        INCOMING_RUNE_ANIMATIONS_LANDING_TO_RADIUS_MULTIPLIER *
-        15,
+          INCOMING_RUNE_ANIMATIONS_HITTING_DURATION_MULTIPLIER +
+        INCOMING_RUNE_ANIMATIONS_HITTING_DELAY,
       from: { oscillation: 0 },
       proxy: { oscillation: 0 },
       tick: -1,
