@@ -2,7 +2,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 import type { PluginOption } from "vite";
 import { defineConfig } from "vitest/config";
 
-import { webSocketServerVitePlugin } from "./src/lib/runes/server/web-socket-server/web-socket-server-vite-plugin.js";
+import { webSocketServerVitePlugin } from "./src/lib/tiles/server/web-socket-server/web-socket-server-vite-plugin.js";
 
 const reloadEverything: PluginOption = {
   handleHotUpdate: ({ server }) => {

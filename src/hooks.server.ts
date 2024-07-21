@@ -1,7 +1,7 @@
 import type { Handle } from "@sveltejs/kit";
 
-import { webSocketServerHandlers } from "./lib/runes/server/core/web-socket-server-handlers.js";
-import { startWebSocketServer } from "./lib/runes/server/web-socket-server/start-web-socket-server.js";
+import { webSocketServerHandlers } from "./lib/tiles/server/core/web-socket-server-handlers.js";
+import { startWebSocketServer } from "./lib/tiles/server/web-socket-server/start-web-socket-server.js";
 
 export const handle = (async ({ event, resolve }) => {
   startWebSocketServer({ webSocketServerHandlers });

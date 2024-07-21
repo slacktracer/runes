@@ -1,8 +1,8 @@
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
-import { createWebSocketServerGlobalInstance } from "./lib/runes/server/web-socket-server/create-web-socket-server-global-instance.js";
-import { onHttpServerUpgrade } from "./lib/runes/server/web-socket-server/on-http-server-upgrade.js";
+import { createWebSocketServerGlobalInstance } from "./lib/tiles/server/web-socket-server/create-web-socket-server-global-instance.js";
+import { onHttpServerUpgrade } from "./lib/tiles/server/web-socket-server/on-http-server-upgrade.js";
 
 createWebSocketServerGlobalInstance();
 
